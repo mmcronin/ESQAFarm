@@ -1,0 +1,7 @@
+{
+  "itemDisplayName": "Creates a Farm Deployment",
+  "description": "QA Farm Deployment",
+  "summary": "This template creates an AD Forest,SQL 2016 Server and WFE",
+  "githubUsername": "mmcronin   ",
+  "dateUpdated": "2017-04-26"
+}
