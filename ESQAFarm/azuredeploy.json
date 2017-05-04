@@ -51,6 +51,13 @@
       },
       "defaultValue": "10.0.27.5"
     },
+    "wfeNicIPAddress": {
+      "type": "string",
+      "metadata": {
+        "description": "The IP address of the new AD VM"
+      },
+      "defaultValue": "10.0.27.6"
+    },
     "adminUsername": {
       "type": "string",
       "metadata": {
@@ -98,6 +105,20 @@
         "description": "The SQL Server Service account password"
       }
     },
+    "wfeVmName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the WFE"
+      },
+      "defaultValue": "ESQA-WFE"
+    },
+    "wfeVMSize": {
+      "type": "string",
+      "metadata": {
+        "description": "The size of the WFE VM Created"
+      },
+      "defaultValue": "Standard_DS2_V2"
+    },
     "domainName": {
       "type": "string",
       "metadata": {
@@ -118,7 +139,7 @@
       "metadata": {
         "description": "Name prefix of the new storage account created to store the VMs disks"
       },
-      "defaultValue": "adsta"
+      "defaultValue": "sta"
     },
     "storageAccountType": {
       "type": "string",
@@ -135,15 +156,19 @@
     "assetLocation": "[concat(parameters('baseURL'),'/dsc')]",
     "adVMName": "[parameters('adVmName')]",
     "sqlVMName": "[parameters('sqlVmName')]",
+    "wfeVMName": "[parameters('wfeVmName')]",
     "VMSubnetName": "VMSubnet",
     "adNicName": "adNic",
     "sqlNicName": "sqlNic",
+    "wfeNicName": "wfeNic",
     "VnetID": "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
     "VMSubnetRef": "[concat(variables('VnetID'),'/subnets/',variables('VMSubnetName'))]",
     "adNicId": "[resourceId('Microsoft.Network/networkInterfaces',variables('adNicName'))]",
     "sqlNicId": "[resourceId('Microsoft.Network/networkInterfaces',variables('sqlNicName'))]",
+    "wfeNicId": "[resourceId('Microsoft.Network/networkInterfaces',variables('wfeNicName'))]",
     "adIPConfigID": "[concat(variables('adNicId'),'/ipConfigurations/ipconfig1')]",
     "sqlIPConfigID": "[concat(variables('sqlNicId'),'/ipConfigurations/ipconfig1')]",
+    "wfeIPConfigID": "[concat(variables('wfeNicId'),'/ipConfigurations/ipconfig1')]",
     "adDataDisk": "ADDataDisk",
     "adDataDiskSize": 127,
     "sqlDataDisk": "SQLDataDisk",
@@ -152,6 +177,7 @@
     "sqlLogDiskSize": 127,
     "adpublicIPAddressName": "adpublicIP",
     "sqlpublicIPAddressName": "sqlpublicIP",
+    "wfepublicIPAddressName": "wfepublicIP",
     "publicIPAddressType": "Dynamic",
     "subnets": [
       {
@@ -165,8 +191,12 @@
     "adConfigurationFunction": "CreateADPDC.ps1\\CreateADPDC",
     "sqlConfigureModulesURL": "[concat(variables('assetLocation'),'/ConfigureSqlServer.ps1.zip')]",
     "sqlConfigurationFunction": "ConfigureSqlServer.ps1\\ConfigureSqlServer",
+    "wfeConfigureModulesURL": "[concat(variables('assetLocation'),'/ConfigureWFEServer.ps1.zip')]",
+    "wfeConfigurationFunction": "ConfigureWFEServer.ps1\\ConfigureWFEServer",
     "sqlPrepareModulesURL": "[concat(variables('assetLocation'),'/PrepareSqlServer.ps1.zip')]",
     "sqlPreparationFunction": "PrepareSqlServer.ps1\\PrepareSqlServer",
+    "wfePrepareModulesURL": "[concat(variables('assetLocation'),'/PrepareWFEServer.ps1.zip')]",
+    "wfePreparationFunction": "PrepareWFEServer.ps1\\PrepareWFEServer",
     "storageAccountSetupURL": "[concat(parameters('baseUrl'),'/storageAccount.json')]",
     "creatingPublicIPsUrl": "[concat(parameters('baseUrl'),'/creatingPublicIPs.json')]",
     "vnetwithDNSTemplateUrl": "[concat(parameters('baseUrl'),'/vnet-with-dns-server.json')]",
@@ -174,7 +204,9 @@
     "creatingNICSUrl": "[concat(parameters('baseUrl'),'/creatingNICS.json')]",
     "ProvisioningADDomainControllerUrl": "[concat(parameters('baseUrl'),'/provisioningDomainController.json')]",
     "ProvisioningSQLUrl": "[concat(parameters('baseUrl'),'/provisioningSQL.json')]",
-    "configuringSQLUrl": "[concat(parameters('baseUrl'),'/configuringSQL.json')]"
+    "configuringSQLUrl": "[concat(parameters('baseUrl'),'/configuringSQL.json')]",
+    "ProvisioningWFEUrl": "[concat(parameters('baseUrl'),'/provisioningWFE.json')]",
+    "configuringWFEUrl": "[concat(parameters('baseUrl'),'/configuringWFE.json')]"
   },
   "resources": [
     {
@@ -219,6 +251,9 @@
           },
           "sqlpublicIPAddressName": {
             "value": "[variables('sqlpublicIPAddressName')]"
+          },
+          "wfepublicIPAddressName": {
+            "value": "[variables('wfepublicIPAddressName')]"
           },
           "publicIPAddressType": {
             "value": "[variables('publicIPAddressType')]"
@@ -284,6 +319,12 @@
           },
           "sqlNicIPAddress": {
             "value": "[parameters('sqlNicIPAddress')]"
+          },
+          "wfeNicName": {
+            "value": "[variables('wfeNicName')]"
+          },
+          "wfeNicIPAddress": {
+            "value": "[parameters('wfeNicIPAddress')]"
           }
         }
       }
@@ -394,6 +435,54 @@
         }
       },
       {
+        "name": "ProvisioningWFEVM",
+        "type": "Microsoft.Resources/deployments",
+        "apiVersion": "2015-01-01",
+        "dependsOn": [
+          "Microsoft.Resources/deployments/SettingUpStorageAccount",
+          "Microsoft.Resources/deployments/CreatingNetworkInterfaces"
+        ],
+        "properties": {
+          "mode": "Incremental",
+          "templateLink": {
+            "uri": "[variables('ProvisioningWFEUrl')]",
+            "contentVersion": "1.0.0.0"
+          },
+          "parameters": {
+            "location": {
+              "value": "[parameters('location')]"
+            },
+            "wfeVMName": {
+              "value": "[variables('wfeVMName')]"
+            },
+            "wfeVMSize": {
+              "value": "[parameters('wfeVMSize')]"
+            },
+            "adminUsername": {
+              "value": "[parameters('adminUsername')]"
+            },
+            "adminPassword": {
+              "value": "[parameters('adminPassword')]"
+            },
+            "storageAccountNamePrefix": {
+              "value": "[parameters('storageAccountNamePrefix')]"
+            },
+            "wfeNicName": {
+              "value": "[variables('wfeNicName')]"
+            },
+            "wfePrepareModulesURL": {
+              "value": "[variables('wfePrepareModulesURL')]"
+            },
+            "wfePreparationFunction": {
+              "value": "[variables('wfePreparationFunction')]"
+            },
+            "DNSServerAddress": {
+              "value": "[parameters('adNicIPAddress')]"
+            }
+          }
+        }
+      },
+      {
         "name": "UpdatingDNStoPrimaryADVM",
         "type": "Microsoft.Resources/deployments",
         "apiVersion": "2015-01-01",
@@ -471,6 +560,45 @@
               "value": "[parameters('sqlServerServiceAccountPassword')]"
             }
           }
+        }
+      },
+         {
+        "name": "ConfiguringWFEServerVM",
+        "type": "Microsoft.Resources/deployments",
+        "apiVersion": "2015-01-01",
+        "dependsOn": [
+          "Microsoft.Resources/deployments/ProvisioningWFEServerVM",
+          "Microsoft.Resources/deployments/UpdatingDNStoPrimaryADVM"
+        ],
+        "properties": {
+          "mode": "Incremental",
+          "templateLink": {
+            "uri": "[variables('configuringWFEUrl')]",
+            "contentVersion": "1.0.0.0"
+          },
+          "parameters": {
+            "location": {
+              "value": "[parameters('location')]"
+            },
+            "wfeVMName": {
+              "value": "[variables('wfeVMName')]"
+            },
+            "adminUsername": {
+              "value": "[parameters('adminUsername')]"
+            },
+            "adminPassword": {
+              "value": "[parameters('adminPassword')]"
+            },
+            "wfeConfgureModulesURL": {
+              "value": "[variables('wfeConfigureModulesURL')]"
+            },
+            "wfeConfigurationFunction": {
+              "value": "[variables('wfeConfigurationFunction')]"
+            },
+            "domainName": {
+              "value": "[parameters('domainName')]"
+            }
+            }
         }
       }
   ]

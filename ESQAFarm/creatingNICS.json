@@ -11,6 +11,12 @@
     "adNicIPAddress": {
       "type": "string"
     },
+    "wfeNicName": {
+      "type": "string"
+    },
+    "wfeNicIPAddress": {
+      "type": "string"
+    },
     "sqlNicIPAddress": {
       "type": "string"
     },
@@ -34,6 +40,26 @@
             "properties": {
               "privateIPAllocationMethod": "Static",
               "privateIPAddress": "[parameters('adNicIPAddress')]",
+              "subnet": {
+                "id": "[parameters('VMSubnetRef')]"
+              }
+              }
+          }
+        ]
+      }
+    },
+    {
+      "name": "[parameters('wfeNicName')]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "location": "[parameters('location')]",
+      "apiVersion": "2015-06-15",
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[parameters('wfeNicIPAddress')]",
               "subnet": {
                 "id": "[parameters('VMSubnetRef')]"
               }

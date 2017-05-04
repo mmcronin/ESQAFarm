@@ -13,6 +13,9 @@
     },
     "sqlpublicIPAddressName": {
       "type": "string"
+    },
+    "wfepublicIPAddressName": {
+      "type": "string"
     }
   },
   "resources": [
@@ -33,12 +36,25 @@
       "properties": {
         "publicIPAllocationMethod": "[parameters('publicIPAddressType')]"
       }
+    },
+    {
+      "apiVersion": "2015-06-15",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "name": "[parameters('wfepublicIPAddressName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "publicIPAllocationMethod": "[parameters('publicIPAddressType')]"
+      }
     }
   ],
   "outputs": {
     "adPublicIpResourceId": {
       "type": "string",
       "value": "[resourceId('Microsoft.Network/publicIPAddresses',parameters('adpublicIPAddressName'))]"
+    },
+    "sqlPublicIpResourceId": {
+      "type": "string",
+      "value": "[resourceId('Microsoft.Network/publicIPAddresses',parameters('sqlpublicIPAddressName'))]"
     },
     "sqlPublicIpResourceId": {
       "type": "string",
