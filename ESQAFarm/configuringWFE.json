@@ -5,7 +5,7 @@
     "location": {
       "type": "string"
     },
-    "sqlVMName": {
+    "wfeVMName": {
       "type": "string"
     },
     "adminUsername": {
@@ -14,26 +14,20 @@
     "adminPassword": {
       "type": "securestring"
     },
-    "sqlConfgureModulesURL": {
+    "wfeConfgureModulesURL": {
       "type": "string"
     },
-    "sqlConfigurationFunction": {
+    "wfeConfigurationFunction": {
       "type": "string"
     },
     "domainName": {
       "type": "string"
-    },
-    "sqlServerServiceAccountUserName": {
-      "type": "string"
-    },
-    "sqlServerServiceAccountPassword": {
-      "type": "securestring"
     }
   },
   "resources": [
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('sqlVMName'),'/CreateSQLServer')]",
+      "name": "[concat(parameters('wfeVMName'),'/CreateWFEServer')]",
       "apiVersion": "2015-06-15",
       "location": "[parameters('location')]",
       "properties": {
@@ -42,29 +36,24 @@
         "typeHandlerVersion": "2.20",
         "autoUpgradeMinorVersion": true,
         "settings": {
-          "ModulesUrl": "[parameters('sqlConfgureModulesURL')]",
+          "ModulesUrl": "[parameters('wfeConfgureModulesURL')]",
           "wmfVersion": "5.0",
-          "ConfigurationFunction": "[parameters('sqlConfigurationFunction')]",
+          "ConfigurationFunction": "[parameters('wfeConfigurationFunction')]",
           "Properties": {
             "DomainName": "[parameters('domainName')]",
             "AdminCreds": {
               "UserName": "[parameters('adminUserName')]",
               "Password": "PrivateSettingsRef:AdminPassword"
-            },
-            "SqlServerServiceAccountcreds": {
-              "UserName": "[parameters('sqlServerServiceAccountUserName')]",
-              "Password": "PrivateSettingsRef:SqlServerServiceAccountPassword"
             }
-           }
-        },
+          }
+        }
+       },
         "protectedSettings": {
           "Items": {
-            "AdminPassword": "[parameters('adminPassword')]",
-            "SqlServerServiceAccountPassword": "[parameters('sqlServerServiceAccountPassword')]"
-           }
+            "AdminPassword": "[parameters('adminPassword')]"
+            }
         }
-      }
-    }
+        }
   ],
   "outputs": {}
 }
