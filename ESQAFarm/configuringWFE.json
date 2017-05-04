@@ -48,11 +48,9 @@
           }
         }
        },
-        "protectedSettings": {
-          "Items": {
-            "AdminPassword": "[parameters('adminPassword')]"
-            }
-        }
+       "protectedSettings": {
+             "AdminPassword": "[parameters('adminPassword')]"
+              }       
         }
   ],
   "outputs": {}
