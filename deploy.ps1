@@ -27,7 +27,7 @@
 param(
  [Parameter(Mandatory=$True)]
  [string]
- $subscriptionId,
+ $subscriptionId, #3c9da9ec-1563-4427-9250-06ac13976865
 
  [Parameter(Mandatory=$True)]
  [string]
@@ -104,4 +104,4 @@ if(Test-Path $parametersFilePath) {
     New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $templateFilePath;
 }
 
- New-AzureRmResourceGroupDeployment -ResourceGroupName 'SPFarm' -TemplateFile 'C:\Users\michaelcronin\Documents\GitHub\ESQAFarm\ESQAFarm\azuredeploy.json'
+ #New-AzureRmResourceGroupDeployment -ResourceGroupName 'SPFarm' -TemplateFile 'C:\Users\michaelcronin\Documents\GitHub\ESQAFarm\ESQAFarm\azuredeploy.json'
