@@ -8,7 +8,7 @@
     "wfeVMName": {
       "type": "string"
     },
-    "adminUsername": {
+    "domainjoinUsername": {
       "type": "string"
     },
     "adminPassword": {
@@ -16,35 +16,43 @@
     },
     "domainName": {
       "type": "string"
-    }
-  },
-  "variables": {
-        "domainJoinOptions": 3
-        },
-  "resources": [
-    {
-      "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('wfeVMName'),'/joindomain')]",
-      "apiVersion": "2015-06-15",
-      "location": "[parameters('location')]",
-      "properties": {
-        "publisher": "Microsoft.Compute",
-        "type": "JsonADDomainExtension",
-        "typeHandlerVersion": "1.3",
-        "autoUpgradeMinorVersion": true,
-        "settings": {
-                    "Name": "[parameters('domainName')]",
-                    "User": "[parameters('adminUserName')]",
-                    "Restart": "true",
-                    "Options": "[variables('domainJoinOptions')]"
-        },
-       "protectedSettings": {
-        "Items": {
-          "Password": "[parameters('adminPassword')]"
+    },
+    "ouPath": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Specifies an organizational unit (OU) for the domain account. Enter the full distinguished name of the OU in quotation marks. Example: OU=testOU; DC=domain; DC=Domain; DC=com"
+      }
+      }
+     },
+    "variables": {
+      "domainJoinOptions": 3
+    },
+    "resources": [
+      {
+        "type": "Microsoft.Compute/virtualMachines/extensions",
+        "name": "[concat(parameters('wfeVMName'),'/joindomain')]",
+        "apiVersion": "2015-06-15",
+        "location": "[parameters('location')]",
+        "properties": {
+          "publisher": "Microsoft.Compute",
+          "type": "JsonADDomainExtension",
+          "typeHandlerVersion": "1.3",
+          "autoUpgradeMinorVersion": true,
+          "settings": {
+            "Name": "[parameters('domainName')]",
+            "User": "[parameters('domainJoinUserName')]",
+            "Restart": "true",
+            "Options": "[variables('domainJoinOptions')]",
+            "OUPath": "[parameters('ouPath')]"
+          },
+          "protectedSettings": {
+            "Items": {
+              "Password": "[parameters('adminPassword')]"
+            }
+          }
         }
       }
-      }
-    }
-  ],
-  "outputs": {}
-}
+    ],
+    "outputs": { }
+  }
