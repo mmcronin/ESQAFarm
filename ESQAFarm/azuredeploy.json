@@ -201,8 +201,6 @@
       "adConfigurationFunction": "CreateADPDC.ps1\\CreateADPDC",
       "sqlConfigureModulesURL": "[concat(variables('assetLocation'),'/ConfigureSqlServer.ps1.zip')]",
       "sqlConfigurationFunction": "ConfigureSqlServer.ps1\\ConfigureSqlServer",
-      "wfeConfigureModulesURL": "[concat(variables('assetLocation'),'/ConfigureWFEServer.ps1.zip')]",
-      "wfeConfigurationFunction": "ConfigureWFEServer.ps1\\ConfigureWFEServer",
       "sqlPrepareModulesURL": "[concat(variables('assetLocation'),'/PrepareSqlServer.ps1.zip')]",
       "sqlPreparationFunction": "PrepareSqlServer.ps1\\PrepareSqlServer",
       "wfePrepareModulesURL": "[concat(variables('assetLocation'),'/PrepareWFEServer.ps1.zip')]",
@@ -599,12 +597,6 @@
             },
             "adminPassword": {
               "value": "[parameters('adminPassword')]"
-            },
-            "wfeConfgureModulesURL": {
-              "value": "[variables('wfeConfigureModulesURL')]"
-            },
-            "wfeConfigurationFunction": {
-              "value": "[variables('wfeConfigurationFunction')]"
             },
             "domainName": {
               "value": "[parameters('domainName')]"
