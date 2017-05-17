@@ -99,9 +99,8 @@
           "Properties": {
                 "DNSServer": "[parameters('DNSServerAddress')]"
           }
-        },
-        "protectedSettings": null
-      } 
+        }
+       } 
     }
      ],
   "outputs": {}
