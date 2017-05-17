@@ -104,4 +104,4 @@ if(Test-Path $parametersFilePath) {
     New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $templateFilePath;
 }
 
- #New-AzureRmResourceGroupDeployment -ResourceGroupName 'SPFarm' -TemplateFile 'C:\Users\michaelcronin\Documents\GitHub\ESQAFarm\ESQAFarm\azuredeploy.json'
+ New-AzureRmResourceGroupDeployment -ResourceGroupName 'SPFarm' -TemplateFile 'C:\Users\michaelcronin\Documents\GitHub\ESQAFarm\ESQAFarm\azuredeploy.json'
