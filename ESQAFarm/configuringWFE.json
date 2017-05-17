@@ -27,10 +27,7 @@
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(parameters('wfeVMName'),'/joindomain')]",
       "location": "[parameters('location')]",
-      "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/', parameters('wfeVMName'))]"
-      ],
-      "properties": {
+        "properties": {
         "publisher": "Microsoft.Compute",
         "type": "JsonADDomainExtension",
         "typeHandlerVersion": "1.3",
