@@ -97,10 +97,11 @@
           "wmfVersion": "5.0",
           "ConfigurationFunction": "[parameters('wfePreparationFunction')]",
           "Properties": {
-                "DNSServer": "[parameters('DNSServerAddress')]"
+            "DNSServer": "[parameters('DNSServerAddress')]"
           }
-        }
-       } 
+        },
+        "protectedSettings": null
+      } 
     }
      ],
   "outputs": {}
