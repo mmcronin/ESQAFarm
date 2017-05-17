@@ -488,7 +488,8 @@
         "apiVersion": "2015-01-01",
         "dependsOn": [
           "Microsoft.Resources/deployments/ProvisioningADDomainController",
-          "Microsoft.Resources/deployments/ProvisioningSQLServerVM"
+          "Microsoft.Resources/deployments/ProvisioningSQLServerVM",
+          "Microsoft.Resources/deployments/ProvisioningWFEServerVM"
         ],
         "properties": {
           "mode": "Incremental",
