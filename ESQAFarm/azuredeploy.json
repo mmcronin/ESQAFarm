@@ -203,8 +203,7 @@
     "ProvisioningADDomainControllerUrl": "[concat(parameters('baseUrl'),'/provisioningDomainController.json')]",
     "ProvisioningSQLUrl": "[concat(parameters('baseUrl'),'/provisioningSQL.json')]",
     "configuringSQLUrl": "[concat(parameters('baseUrl'),'/configuringSQL.json')]",
-    "ProvisioningWFEUrl": "[concat(parameters('baseUrl'),'/provisioningWFE.json')]",
-    "configuringWFEUrl": "[concat(parameters('baseUrl'),'/configuringWFE.json')]"
+    "ProvisioningWFEUrl": "[concat(parameters('baseUrl'),'/provisioningWFE.json')]"
   },
   "resources": [
     {
@@ -557,39 +556,6 @@
             },
             "sqlServerServiceAccountPassword": {
               "value": "[parameters('sqlServerServiceAccountPassword')]"
-            }
-          }
-        }
-      },
-         {
-        "name": "ConfiguringWFEServerVM",
-        "type": "Microsoft.Resources/deployments",
-        "apiVersion": "2015-01-01",
-        "dependsOn": [
-          "Microsoft.Resources/deployments/ProvisioningWFEServerVM",
-          "Microsoft.Resources/deployments/UpdatingDNStoPrimaryADVM"
-        ],
-        "properties": {
-          "mode": "Incremental",
-          "templateLink": {
-            "uri": "[variables('configuringWFEUrl')]",
-            "contentVersion": "1.0.0.0"
-          },
-          "parameters": {
-            "location": {
-              "value": "[parameters('location')]"
-            },
-            "wfeVMName": {
-              "value": "[variables('wfeVMName')]"
-            },
-            "adminUsername": {
-              "value": "[parameters('adminUsername')]"
-            },
-            "adminPassword": {
-              "value": "[parameters('adminPassword')]"
-            },
-            "domainName": {
-              "value": "[parameters('domainName')]"
             }
           }
         }
