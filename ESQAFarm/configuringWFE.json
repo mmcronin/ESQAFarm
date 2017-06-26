@@ -19,7 +19,7 @@
     },
     "ouPath": {
     "type": "string",
-    "defaultValue": "CN=Servers,DC=esqc,DC=test"
+    "defaultValue": "CN=Servers,DC=esqa,DC=test"
     }
   },
   "resources": [
