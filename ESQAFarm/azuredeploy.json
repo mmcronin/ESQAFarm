@@ -126,6 +126,10 @@
       },
       "defaultValue": "esqa.test"
     },
+     "ouPath": {
+    "type": "string",
+    "defaultValue": "CN=Servers,DC=esqc,DC=test"
+    },
     "baseUrl": {
       "type": "string",
       "metadata": {
