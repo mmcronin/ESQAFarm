@@ -128,7 +128,7 @@
     },
      "ouPath": {
     "type": "string",
-    "defaultValue": "CN=Servers,DC=esqc,DC=test"
+    "defaultValue": "OU=Servers,DC=esqa,DC=test"
     },
     "baseUrl": {
       "type": "string",
