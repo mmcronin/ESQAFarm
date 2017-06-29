@@ -382,9 +382,6 @@
             },
             "domainName": {
               "value": "[parameters('domainName')]"
-            },
-             "baseOUPath": {
-              "value": "[parameters('baseOUPath')]"
             }
           }
         }
