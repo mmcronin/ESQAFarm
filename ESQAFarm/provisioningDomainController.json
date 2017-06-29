@@ -34,7 +34,11 @@
     },
     "domainName": {
       "type": "string"
-    }
+    },
+    "baseOUPath": {
+    "type": "string",
+    "defaultValue": "DC=esqa,DC=test"
+    },
   },
   "resources": [
     {

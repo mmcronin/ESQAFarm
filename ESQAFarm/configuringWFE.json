@@ -20,10 +20,6 @@
     "ouPath": {
     "type": "string",
     "defaultValue": "OU=Servers,DC=esqa,DC=test"
-    },
-    "baseOUPath": {
-    "type": "string",
-    "defaultValue": "DC=esqa,DC=test"
     }
   },
   "resources": [
