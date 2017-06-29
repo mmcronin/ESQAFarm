@@ -27,7 +27,12 @@
             "[parameters('virtualNetworkAddressRange')]"
           ]
         },
-        "subnets": "[parameters('subnets')]"
+        "subnets": "[parameters('subnets')]",
+        "properties": {
+          "networkSecurityGroup":{
+             "id": "[concat(resourceGroup().id, '/providers/Microsoft.Network/networkSecurityGroups/SettingUpNSG')]"
+          }
+        }
       }
     }
   ]

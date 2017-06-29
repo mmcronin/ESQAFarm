@@ -30,6 +30,10 @@
       },
       "defaultValue": "ESQA-DC"
     },
+    "NSGName": {
+    "type": "string",
+    "defaultValue": "ESQAVNET-Subnet"
+    },
     "VMSubnet": {
       "type": "string",
       "metadata": {
@@ -239,6 +243,37 @@
       }
     },
     {
+      "name": "SettingUpNSG",
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2015-06-15",
+      "parameters": {
+        "NSGName": {
+          "value": "[parameters('NSGName')]"
+        },
+      "location": {
+           "value": "[parameters('location')]"
+                   }
+       },
+      "properties": {
+        "securityRules": [
+          {
+            "name": "RDP_Allow",
+            "properties": {
+              "description": "RDP_Allow",
+              "protocol": "TCP",
+              "sourcePortRange": "*",
+              "destinationPortRange": "3389",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 100,
+              "direction": "Inbound"
+            }
+          }
+        ]
+      }
+    },
+    {
       "name": "SettingUpPublicIPs",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
@@ -271,6 +306,9 @@
       "name": "SettingUpVirtualNetwork",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
+      "dependsOn": [
+         "Microsoft.Network/networkSecurityGroups/SettingUpNSG"
+         ],
       "properties": {
         "mode": "Incremental",
         "templateLink": {
