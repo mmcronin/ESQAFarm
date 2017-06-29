@@ -126,9 +126,13 @@
       },
       "defaultValue": "esqa.test"
     },
-     "ouPath": {
+    "ouPath": {
     "type": "string",
     "defaultValue": "OU=Servers,DC=esqa,DC=test"
+    },
+    "baseOUPath": {
+    "type": "string",
+    "defaultValue": "DC=esqa,DC=test"
     },
     "baseUrl": {
       "type": "string",
@@ -594,6 +598,9 @@
             },
               "domainName": {
               "value": "[parameters('domainName')]"
+            },
+            "baseOUPath": {
+              "value": "[parameters('baseOUPath')]"
             }
             }
         }
