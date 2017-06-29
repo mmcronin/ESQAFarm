@@ -246,7 +246,10 @@
       "name": "[parameters('NSGName')]",
       "type": "Microsoft.Network/networkSecurityGroups",
       "apiVersion": "2015-06-15",
-      "location": "[parameters('location')]",                     
+      "location": "[parameters('location')]", 
+      "tags": {
+        "displayName": "[parameters('NSGName')]"
+      },                    
       "properties": {
         "securityRules": [
           {
