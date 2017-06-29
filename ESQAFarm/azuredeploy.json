@@ -243,17 +243,10 @@
       }
     },
     {
-      "name": "SettingUpNSG",
+      "name": "[parameters('NSGName')]",
       "type": "Microsoft.Network/networkSecurityGroups",
       "apiVersion": "2015-06-15",
-      "parameters": {
-        "NSGName": {
-          "value": "[parameters('NSGName')]"
-        },
-      "location": {
-           "value": "[parameters('location')]"
-                   }
-       },
+      "location": "[parameters('location')]",                     
       "properties": {
         "securityRules": [
           {
