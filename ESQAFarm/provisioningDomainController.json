@@ -38,7 +38,7 @@
     "baseOUPath": {
     "type": "string",
     "defaultValue": "DC=esqa,DC=test"
-    },
+    }
   },
   "resources": [
     {
@@ -117,6 +117,7 @@
               "ConfigurationFunction": "[parameters('adConfigurationFunction')]",
               "Properties": {
                 "DomainName": "[parameters('domainName')]",
+                "baseOUPath": "[parameters('baseOUPath')]",
                 "AdminCreds": {
                   "UserName": "[parameters('adminUserName')]",
                   "Password": "PrivateSettingsRef:AdminPassword"
