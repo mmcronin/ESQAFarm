@@ -25,6 +25,15 @@
     },
     "sqlNicName": {
       "type": "string"
+    },
+     "adpublicIPAddressName": {
+      "type": "string"
+    },
+     "sqlpublicIPAddressName": {
+      "type": "string"
+    },
+    "wfepublicIPAddressName": {
+      "type": "string"
     }
   },
   "resources": [
@@ -33,11 +42,17 @@
       "type": "Microsoft.Network/networkInterfaces",
       "location": "[parameters('location')]",
       "apiVersion": "2015-06-15",
+       "dependsOn": [ 
+        "[concat('Microsoft.Network/publicIPAddresses/', parameters('adpublicIPAddressName'))]" 
+        ], 
       "properties": {
         "ipConfigurations": [
           {
             "name": "ipconfig1",
             "properties": {
+              "publicIPAddress": { 
+                "id": "[resourceId ('Microsoft.Network/publicIPAddresses/', parameters('adpublicIPAddressName'))]" 
+              },
               "privateIPAllocationMethod": "Static",
               "privateIPAddress": "[parameters('adNicIPAddress')]",
               "subnet": {
@@ -53,11 +68,17 @@
       "type": "Microsoft.Network/networkInterfaces",
       "location": "[parameters('location')]",
       "apiVersion": "2015-06-15",
+       "dependsOn": [ 
+        "[concat('Microsoft.Network/publicIPAddresses/', parameters('wfepublicIPAddressName'))]" 
+        ],
       "properties": {
         "ipConfigurations": [
           {
             "name": "ipconfig1",
             "properties": {
+               "publicIPAddress": { 
+                "id": "[resourceId ('Microsoft.Network/publicIPAddresses/', parameters('wfepublicIPAddressName'))]" 
+                 },
               "privateIPAllocationMethod": "Static",
               "privateIPAddress": "[parameters('wfeNicIPAddress')]",
               "subnet": {
@@ -73,11 +94,17 @@
       "type": "Microsoft.Network/networkInterfaces",
       "location": "[parameters('location')]",
       "apiVersion": "2015-06-15",
+       "dependsOn": [ 
+        "[concat('Microsoft.Network/publicIPAddresses/', parameters('sqlpublicIPAddressName'))]" 
+        ],
       "properties": {
         "ipConfigurations": [
           {
             "name": "ipconfig1",
             "properties": {
+               "publicIPAddress": { 
+                "id": "[resourceId ('Microsoft.Network/publicIPAddresses/', parameters('sqlpublicIPAddressName'))]" 
+                 },
               "privateIPAllocationMethod": "Static",
               "privateIPAddress": "[parameters('sqlNicIPAddress')]",
               "subnet": {
