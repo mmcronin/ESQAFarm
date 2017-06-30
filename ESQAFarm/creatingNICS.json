@@ -27,13 +27,21 @@
       "type": "string"
     }
   },
-  "variables": {
-   "adpublicIPAddressName": "adpublicIP",
-   "sqlpublicIPAddressName": "sqlpublicIP",
-   "wfepublicIPAddressName": "wfepublicIP"
-  },
   "resources": [
-    {
+        { 
+            "apiVersion": "2017-03-01", 
+            "name": "PublicIPS", 
+            "type": "Microsoft.Resources/deployments", 
+            "location": "[parameters('location')]",
+            "properties": { 
+                "mode": "incremental", 
+                "templateLink": {
+                    "uri":"https://raw.githubusercontent.com/mmcronin/ESQAfarm/master/ESQAFarm/creatingPublicIPS.json",
+                    "contentVersion":"1.0.0.0"
+                }
+            }
+        },
+     {
       "name": "[parameters('adNicName')]",
       "type": "Microsoft.Network/networkInterfaces",
       "location": "[parameters('location')]",
@@ -44,7 +52,7 @@
             "name": "ipconfig1",
             "properties": {
               "publicIPAddress": { 
-                "id": "[reference(concat('Microsoft.Network/publicIPAddresses', '/', variables('adpublicIPAddressName')))]"
+                "id": "[reference('PublicIPs').adPublicIpResourceId.outputs.value]"
               },
               "privateIPAllocationMethod": "Static",
               "privateIPAddress": "[parameters('adNicIPAddress')]",
@@ -67,7 +75,7 @@
             "name": "ipconfig1",
             "properties": {
                "publicIPAddress": { 
-                 "id": "[reference(concat('Microsoft.Network/publicIPAddresses','/',variables('wfepublicIPAddressName')))]"
+                 "id": "[reference('PublicIPs').wfePublicIpResourceId.outputs.value]"
                  },
               "privateIPAllocationMethod": "Static",
               "privateIPAddress": "[parameters('wfeNicIPAddress')]",
@@ -90,7 +98,7 @@
             "name": "ipconfig1",
             "properties": {
                "publicIPAddress": { 
-                 "id": "[reference(concat('Microsoft.Network/publicIPAddresses','/',variables('sqlpublicIPAddressName')))]"
+                 "id": "[reference('PublicIPs').sqlPublicIpResourceId.outputs.value]"
                  },
               "privateIPAllocationMethod": "Static",
               "privateIPAddress": "[parameters('sqlNicIPAddress')]",
