@@ -2,11 +2,7 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    
-    "location": {
-      "type": "string"
-    },
-    "adNicName": {
+   "adNicName": {
       "type": "string"
     },
     "adNicIPAddress": {
@@ -34,7 +30,7 @@
           "apiVersion": "2017-03-01", 
           "name": "PublicIPS", 
           "type": "Microsoft.Resources/deployments", 
-          "location": "[parameters('location')]",
+          "location": "[resourceGroup().location]",
           "properties": { 
             "mode": "incremental", 
               "templateLink": {
@@ -46,7 +42,7 @@
      {
       "name": "[parameters('adNicName')]",
       "type": "Microsoft.Network/networkInterfaces",
-      "location": "[parameters('location')]",
+       "location": "[resourceGroup().location]",
       "apiVersion": "2015-06-15",
        "properties": {
         "ipConfigurations": [
@@ -54,7 +50,7 @@
             "name": "ipconfig1",
             "properties": {
               "publicIPAddress": { 
-                "id": "[reference('PublicIPs').adPublicIpResourceId.outputs.value]"
+                "id": "[reference('PublicIPS').adPublicIpResourceId.outputs.value]"
               },
               "privateIPAllocationMethod": "Static",
               "privateIPAddress": "[parameters('adNicIPAddress')]",
@@ -69,7 +65,7 @@
     {
       "name": "[parameters('wfeNicName')]",
       "type": "Microsoft.Network/networkInterfaces",
-      "location": "[parameters('location')]",
+      "location": "[resourceGroup().location]",
       "apiVersion": "2015-06-15",
       "properties": {
         "ipConfigurations": [
@@ -77,7 +73,7 @@
             "name": "ipconfig1",
             "properties": {
                "publicIPAddress": { 
-                 "id": "[reference('PublicIPs').wfePublicIpResourceId.outputs.value]"
+                 "id": "[reference('PublicIPS').wfePublicIpResourceId.outputs.value]"
                  },
               "privateIPAllocationMethod": "Static",
               "privateIPAddress": "[parameters('wfeNicIPAddress')]",
@@ -92,7 +88,7 @@
     {
       "name": "[parameters('sqlNicName')]",
       "type": "Microsoft.Network/networkInterfaces",
-      "location": "[parameters('location')]",
+       "location": "[resourceGroup().location]",
       "apiVersion": "2015-06-15",
       "properties": {
         "ipConfigurations": [
@@ -100,7 +96,7 @@
             "name": "ipconfig1",
             "properties": {
                "publicIPAddress": { 
-                 "id": "[reference('PublicIPs').sqlPublicIpResourceId.outputs.value]"
+                 "id": "[reference('PublicIPS').sqlPublicIpResourceId.outputs.value]"
                  },
               "privateIPAllocationMethod": "Static",
               "privateIPAddress": "[parameters('sqlNicIPAddress')]",
