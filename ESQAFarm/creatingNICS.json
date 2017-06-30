@@ -44,7 +44,7 @@
             "name": "ipconfig1",
             "properties": {
               "publicIPAddress": { 
-                "id": "[reference(concat('Microsoft.Network/publicIPAddresses',variables('adpublicIPAddressName')))]"
+                "id": "[reference(concat('Microsoft.Network/publicIPAddresses', '/', variables('adpublicIPAddressName')))]"
               },
               "privateIPAllocationMethod": "Static",
               "privateIPAddress": "[parameters('adNicIPAddress')]",
@@ -67,7 +67,7 @@
             "name": "ipconfig1",
             "properties": {
                "publicIPAddress": { 
-                 "id": "[reference(concat('Microsoft.Network/publicIPAddresses',variables('wfepublicIPAddressName')))]"
+                 "id": "[reference(concat('Microsoft.Network/publicIPAddresses','/',variables('wfepublicIPAddressName')))]"
                  },
               "privateIPAllocationMethod": "Static",
               "privateIPAddress": "[parameters('wfeNicIPAddress')]",
@@ -90,7 +90,7 @@
             "name": "ipconfig1",
             "properties": {
                "publicIPAddress": { 
-                 "id": "[reference(concat('Microsoft.Network/publicIPAddresses',variables('sqlpublicIPAddressName')))]"
+                 "id": "[reference(concat('Microsoft.Network/publicIPAddresses','/',variables('sqlpublicIPAddressName')))]"
                  },
               "privateIPAllocationMethod": "Static",
               "privateIPAddress": "[parameters('sqlNicIPAddress')]",
