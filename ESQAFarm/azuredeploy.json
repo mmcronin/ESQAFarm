@@ -195,10 +195,7 @@
       {
         "name": "[variables('VMSubnetName')]",
         "properties": {
-          "addressPrefix": "[parameters('VMSubnet')]",
-          "networkSecurityGroup": {
-                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('NSGName'))]"
-                 }
+          "addressPrefix": "[parameters('VMSubnet')]"
         }
       }
     ],
