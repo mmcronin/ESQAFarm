@@ -36,7 +36,7 @@
             "properties": { 
                 "mode": "incremental", 
                 "templateLink": {
-                    "uri":"https://raw.githubusercontent.com/mmcronin/ESQAfarm/master/ESQAFarm/creatingPublicIPS.json",
+                    "uri":"https://raw.githubusercontent.com/mmcronin/ESQAfarm/master/ESQAFarm/creatingPublicIPs.json",
                     "contentVersion":"1.0.0.0"
                 }
             }
