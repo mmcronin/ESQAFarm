@@ -9,10 +9,6 @@
       },
       "defaultValue": "UK South"
     },
-     "NSGName": {
-      "type": "string",
-      "defaultValue": "ESQAVNET-Subnet"
-    },
     "virtualNetworkName": {
       "type": "string",
       "metadata": {
@@ -33,6 +29,10 @@
         "description": "The name of the Domain Controller"
       },
       "defaultValue": "ESQA-DC"
+    },
+    "NSGName": {
+     "type": "string",
+     "defaultValue": "ESQAVNET-Subnet"
     },
     "VMSubnet": {
       "type": "string",
