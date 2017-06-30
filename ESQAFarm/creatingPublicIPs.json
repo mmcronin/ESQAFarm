@@ -56,9 +56,9 @@
       "type": "string",
       "value": "[resourceId('Microsoft.Network/publicIPAddresses',parameters('sqlpublicIPAddressName'))]"
     },
-    "sqlPublicIpResourceId": {
+    "wfePublicIpResourceId": {
       "type": "string",
-      "value": "[resourceId('Microsoft.Network/publicIPAddresses',parameters('sqlpublicIPAddressName'))]"
+      "value": "[resourceId('Microsoft.Network/publicIPAddresses',parameters('wfepublicIPAddressName'))]"
     }
   }
 }
