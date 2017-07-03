@@ -195,7 +195,10 @@
       {
         "name": "[variables('VMSubnetName')]",
         "properties": {
-          "addressPrefix": "[parameters('VMSubnet')]"
+          "addressPrefix": "[parameters('VMSubnet')]",
+          "networkSecurityGroup": {
+            "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('NSGName'))]"
+            }
         }
       }
     ],
@@ -246,10 +249,6 @@
       "name": "[parameters('NSGName')]",
       "type": "Microsoft.Network/networkSecurityGroups",
       "apiVersion": "2015-06-15",
-      "location": "[parameters('location')]", 
-      "tags": {
-        "displayName": "[parameters('NSGName')]"
-      },                    
       "properties": {
         "securityRules": [
           {
