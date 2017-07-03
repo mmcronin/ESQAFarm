@@ -190,7 +190,6 @@
     "adpublicIPAddressName": "adpublicIP",
     "sqlpublicIPAddressName": "sqlpublicIP",
     "wfepublicIPAddressName": "wfepublicIP",
-    "publicIPAddressType": "Dynamic",
     "subnets": [
       {
         "name": "[variables('VMSubnetName')]",
@@ -211,7 +210,6 @@
     "wfePrepareModulesURL": "[concat(variables('assetLocation'),'/PrepareWFEServer.ps1.zip')]",
     "wfePreparationFunction": "PrepareWFEServer.ps1\\PrepareWFEServer",
     "storageAccountSetupURL": "[concat(parameters('baseUrl'),'/storageAccount.json')]",
-    "creatingPublicIPsUrl": "[concat(parameters('baseUrl'),'/creatingPublicIPs.json')]",
     "vnetwithDNSTemplateUrl": "[concat(parameters('baseUrl'),'/vnet-with-dns-server.json')]",
     "vnetSetupURL": "[concat(parameters('baseUrl'),'/vnet-new.json')]",
     "creatingNICSUrl": "[concat(parameters('baseUrl'),'/creatingNICS.json')]",
@@ -270,35 +268,6 @@
             }
           }
         ]
-      }
-    },
-    {
-      "name": "SettingUpPublicIPs",
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[variables('creatingPublicIPsUrl')]",
-          "contentVersion": "1.0.0.0"
-        },
-        "parameters": {
-          "location": {
-            "value": "[parameters('location')]"
-          },
-          "adpublicIPAddressName": {
-            "value": "[variables('adpublicIPAddressName')]"
-          },
-          "sqlpublicIPAddressName": {
-            "value": "[variables('sqlpublicIPAddressName')]"
-          },
-          "wfepublicIPAddressName": {
-            "value": "[variables('wfepublicIPAddressName')]"
-          },
-          "publicIPAddressType": {
-            "value": "[variables('publicIPAddressType')]"
-          }
-        }
       }
     },
     {
