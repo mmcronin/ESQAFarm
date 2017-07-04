@@ -412,12 +412,6 @@
           "RDPNATRuleID": {
             "value": "[variables('RDPNATRuleID')]"
           },
-          "LBBE": {
-           "value": "[variables('LBBE')]"
-          },
-          "RDPNAT": {
-            "value": "[variables('RDPNAT')]"
-          },
           "adNicName": {
             "value": "[variables('adNicName')]"
           },
