@@ -14,7 +14,13 @@
     "LBBE": {
       "type": "string"
     },
-    "RDPNAT": {
+    "ADRDPNAT": {
+      "type": "string"
+    },
+    "SQLRDPNAT": {
+      "type": "string"
+    },
+    "WFERDPNAT": {
       "type": "string"
     },
    "PublicIpResourceId": {
@@ -45,13 +51,37 @@
         ],
         "inboundNatRules": [
           {
-            "name": "[parameters('RDPNAT')]",
+            "name": "[parameters('ADRDPNAT')]",
             "properties": {
               "frontendIPConfiguration": {
                 "id": "[concat(resourceid(resourceGroup().name,'Microsoft.Network/loadBalancers',parameters('LBName')), '/frontendIPConfigurations/',parameters('LBFE'))]"
               },
               "protocol": "tcp",
-              "frontendPort": 3389,
+              "frontendPort": 5444,
+              "backendPort": 3389,
+              "enableFloatingIP": false
+            }
+          },
+          {
+            "name": "[parameters('SQLRDPNAT')]",
+            "properties": {
+              "frontendIPConfiguration": {
+                "id": "[concat(resourceid(resourceGroup().name,'Microsoft.Network/loadBalancers',parameters('LBName')), '/frontendIPConfigurations/',parameters('LBFE'))]"
+              },
+              "protocol": "tcp",
+              "frontendPort": 5445,
+              "backendPort": 3389,
+              "enableFloatingIP": false
+            }
+          },
+          {
+            "name": "[parameters('WFERDPNAT')]",
+            "properties": {
+              "frontendIPConfiguration": {
+                "id": "[concat(resourceid(resourceGroup().name,'Microsoft.Network/loadBalancers',parameters('LBName')), '/frontendIPConfigurations/',parameters('LBFE'))]"
+              },
+              "protocol": "tcp",
+              "frontendPort": 5446,
               "backendPort": 3389,
               "enableFloatingIP": false
             }
