@@ -32,7 +32,7 @@
       },
     "sqlpublicIPAddressName": {
       "type": "string",
-      "defaultValue": "SQLPIP"
+      "defaultValue": "SQL-PIP"
     },
     "wfepublicIPAddressName": {
       "type": "string",
