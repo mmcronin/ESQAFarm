@@ -11,6 +11,9 @@
     "adVMSize": {
       "type": "string"
     },
+    "AvailabilitySetName": {
+      "type": "string"
+    },
     "adminUsername": {
       "type": "string"
     },
@@ -48,6 +51,9 @@
       "properties": {
         "hardwareProfile": {
           "vmSize": "[parameters('adVMSize')]"
+        },
+        "availabilitySet": {
+          "id": "[resourceId('Microsoft.Compute/availabilitySets', parameters('AvailabilitySetName'))]"
         },
         "osProfile": {
           "computerName": "[parameters('adVMName')]",
