@@ -62,7 +62,23 @@
       },
       "defaultValue": "10.0.27.6"
     },
-    "adminUsername": {
+     "adpublicIPAddressName": {
+      "type": "string",
+      "defaultValue": "AD-PIP"
+      },
+    "sqlpublicIPAddressName": {
+      "type": "string",
+      "defaultValue": "SQL-PIP"
+    },
+    "wfepublicIPAddressName": {
+      "type": "string",
+      "defaultValue": "WFE-PIP"
+    },
+    "publicIPAddressType": { 
+      "type": "string", 
+      "defaultValue": "Dynamic"
+    },
+     "adminUsername": {
       "type": "string",
       "metadata": {
         "description": "The name of the Administrator of the new VM and Domain"
@@ -187,9 +203,6 @@
     "sqlDataDiskSize": 127,
     "sqlLogDisk": "SQLLogDisk",
     "sqlLogDiskSize": 127,
-    "adpublicIPAddressName": "adpublicIP",
-    "sqlpublicIPAddressName": "sqlpublicIP",
-    "wfepublicIPAddressName": "wfepublicIP",
     "subnets": [
       {
         "name": "[variables('VMSubnetName')]",
@@ -304,7 +317,6 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
       "dependsOn": [
-        "Microsoft.Resources/deployments/SettingUpVirtualNetwork",
         "Microsoft.Resources/deployments/SettingUpVirtualNetwork"
       ],
       "properties": {
@@ -337,7 +349,19 @@
           },
           "wfeNicIPAddress": {
             "value": "[parameters('wfeNicIPAddress')]"
-          }
+          },
+          "adpublicIPAddressName": {
+             "value": "[parameters('adpublicIPAddressname')]"
+              },
+          "sqlpublicIPAddressName": {
+             "value": "[parameters('sqlpublicIPAddressname')]"
+              },
+          "wfepublicIPAddressName": {
+             "value": "[parameters('wfepublicIPAddressname')]"
+              },
+          "publicIPAddressType": { 
+             "value": "publicIPAddresstype"
+           }
         }
       }
       },

@@ -23,24 +23,20 @@
     "sqlNicIPAddress": {
       "type": "string"
     },
-      "sqlNicName": {
-      "type": "string"
+    "sqlNicName": {
+    "type": "string"
     },
     "adpublicIPAddressName": {
-      "type": "string",
-      "defaultValue": "AD-PIP"
+      "type": "string"
       },
     "sqlpublicIPAddressName": {
-      "type": "string",
-      "defaultValue": "SQL-PIP"
+      "type": "string"
     },
     "wfepublicIPAddressName": {
-      "type": "string",
-      "defaultValue": "WFE-PIP"
+      "type": "string"
     },
     "publicIPAddressType": { 
-      "type": "string", 
-      "defaultValue": "Dynamic"
+      "type": "string"
     }
     },
    "resources": [
