@@ -11,16 +11,7 @@
     "BEAddressPoolID": {
       "type": "string"
     },
-    "ADRDPNATRuleID": {
-      "type": "string"
-    },
-    "SQLRDPNATRuleID": {
-      "type": "string"
-    },
-    "WFERDPNATRuleID": {
-      "type": "string"
-    },
-   "adNicName": {
+    "adNicName": {
       "type": "string"
     },
     "adNicIPAddress": {
@@ -59,11 +50,6 @@
                 {
                   "id": "[parameters('BEAddressPoolID')]"
                 }
-              ],
-              "loadBalancerInboundNatRules": [
-                {
-                  "id": "[parameters('ADRDPNATRuleID')]"
-                }
               ]
             }
           }
@@ -88,11 +74,6 @@
               "loadBalancerBackendAddressPools": [
                 {
                   "id": "[parameters('BEAddressPoolID')]"
-                }
-              ],
-              "loadBalancerInboundNatRules": [
-                {
-                  "id": "[parameters('SQLRDPNATRuleID')]"
                 }
               ]
             }
@@ -119,12 +100,7 @@
                 {
                   "id": "[parameters('BEAddressPoolID')]"
                 }
-              ],
-              "loadBalancerInboundNatRules": [
-                {
-                  "id": "[parameters('WFERDPNATRuleID')]"
-                }
-              ]
+              ]             
             }
           }
         ]
