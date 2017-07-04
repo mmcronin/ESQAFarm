@@ -191,6 +191,7 @@
     "BEAddressPoolID": "[concat(variables('lbID'),'/backendAddressPools/',variables('LBBE'))]",
     "AvailabilitySetName": "AvailabiltySet",
     "publicIPAddressName": "publicIP",
+    "publicIPAddressType": "Dynamic",
     "adDataDisk": "ADDataDisk",
     "adDataDiskSize": 127,
     "sqlDataDisk": "SQLDataDisk",
@@ -217,7 +218,7 @@
     "wfePrepareModulesURL": "[concat(variables('assetLocation'),'/PrepareWFEServer.ps1.zip')]",
     "wfePreparationFunction": "PrepareWFEServer.ps1\\PrepareWFEServer",
     "storageAccountSetupURL": "[concat(parameters('baseUrl'),'/storageAccount.json')]",
-     "creatingPublicIPsUrl": "[concat(parameters('baseUrl'),'/creatingPublicIPs.json')]",
+    "creatingPublicIPsUrl": "[concat(parameters('baseUrl'),'/creatingPublicIPs.json')]",
     "vnetwithDNSTemplateUrl": "[concat(parameters('baseUrl'),'/vnet-with-dns-server.json')]",
     "CreatingAvailabilitySetsUrl": "[concat(parameters('baseUrl'),'/availabilitySets.json')]",
     "vnetSetupURL": "[concat(parameters('baseUrl'),'/vnet-new.json')]",
@@ -269,6 +270,9 @@
           },
           "publicIPAddressName": {
             "value": "[variables('publicIPAddressName')]"
+          },
+          "publicIPAddressType": {
+            "value": "[variables('publicIPAddressType')]"
           }
         }
       }
@@ -378,7 +382,7 @@
           "lbName": {
             "value": "[variables('lbName')]"
           },
-                   "PublicIpResourceId": {
+          "PublicIpResourceId": {
             "value": "[reference('SettingUpPublicIPs').outputs.PublicIpResourceId.value]"
           }
        }
@@ -464,7 +468,7 @@
             "adVMSize": {
               "value": "[parameters('adVMSize')]"
             },
-            "adAvailabilitySetName": {
+            "AvailabilitySetName": {
             "value": "[variables('AvailabilitySetName')]"
           },
             "adminUsername": {
