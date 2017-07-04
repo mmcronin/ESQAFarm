@@ -1,0 +1,69 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "type": "string"
+    },
+   "lbName": {
+      "type": "string"
+    },
+   "LBFE": {
+      "type": "string"
+    },
+    "LBBE": {
+      "type": "string"
+    },
+    "RDPNAT": {
+      "type": "string"
+    },
+   "PublicIpResourceId": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "apiVersion": "2015-06-15",
+      "name": "[parameters('LBName')]",
+      "type": "Microsoft.Network/loadBalancers",
+      "location": "[parameters('location')]",
+      "properties": {
+        "frontendIPConfigurations": [
+          {
+            "name": "[parameters('LBFE')]",
+            "properties": {
+              "publicIPAddress": {
+                "id": "[parameters('PublicIPResourceId')]"
+              }
+            }
+          }
+        ],
+        "backendAddressPools": [
+          {
+            "name": "[parameters('LBBE')]"
+          }
+        ],
+        "inboundNatRules": [
+          {
+            "name": "[parameters('RDPNAT')]",
+            "properties": {
+              "frontendIPConfiguration": {
+                "id": "[concat(resourceid(resourceGroup().name,'Microsoft.Network/loadBalancers',parameters('LBName')), '/frontendIPConfigurations/',parameters('LBFE'))]"
+              },
+              "protocol": "tcp",
+              "frontendPort": 3389,
+              "backendPort": 3389,
+              "enableFloatingIP": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "outputs": {
+    "lbID": {
+      "value": "[resourceId('Microsoft.Network/loadBalancers',parameters('LBName'))]",
+      "type": "string"
+    }
+  }
+}

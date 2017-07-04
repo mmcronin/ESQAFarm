@@ -62,22 +62,6 @@
       },
       "defaultValue": "10.0.27.6"
     },
-     "adpublicIPAddressName": {
-      "type": "string",
-      "defaultValue": "AD-PIP"
-      },
-    "sqlpublicIPAddressName": {
-      "type": "string",
-      "defaultValue": "SQL-PIP"
-    },
-    "wfepublicIPAddressName": {
-      "type": "string",
-      "defaultValue": "WFE-PIP"
-    },
-    "publicIPAddressType": { 
-      "type": "string", 
-      "defaultValue": "Dynamic"
-    },
      "adminUsername": {
       "type": "string",
       "metadata": {
@@ -189,6 +173,9 @@
     "adNicName": "adNic",
     "sqlNicName": "sqlNic",
     "wfeNicName": "wfeNic",
+    "LBFE": "LBFE",
+    "LBBE": "LBBE",
+    "RDPNAT": "RDP",
     "VnetID": "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
     "VMSubnetRef": "[concat(variables('VnetID'),'/subnets/',variables('VMSubnetName'))]",
     "adNicId": "[resourceId('Microsoft.Network/networkInterfaces',variables('adNicName'))]",
@@ -197,6 +184,13 @@
     "adIPConfigID": "[concat(variables('adNicId'),'/ipConfigurations/ipconfig1')]",
     "sqlIPConfigID": "[concat(variables('sqlNicId'),'/ipConfigurations/ipconfig1')]",
     "wfeIPConfigID": "[concat(variables('wfeNicId'),'/ipConfigurations/ipconfig1')]",
+    "LBName": "LoadBalancer",   
+    "lbID": "[resourceId('Microsoft.Network/loadBalancers',variables('LBName'))]",
+    "lbFEConfigID": "[concat(variables('lbID'),'/frontendIPConfigurations/',variables('LBFE'))]",
+    "RDPNATRuleID": "[concat(variables('lbID'),'/inboundNatRules/',variables('RDPNAT'))]",
+    "BEAddressPoolID": "[concat(variables('lbID'),'/backendAddressPools/',variables('LBBE'))]",
+    "AvailabilitySetName": "AvailabiltySet",
+    "publicIPAddressName": "publicIP",
     "adDataDisk": "ADDataDisk",
     "adDataDiskSize": 127,
     "sqlDataDisk": "SQLDataDisk",
@@ -223,8 +217,11 @@
     "wfePrepareModulesURL": "[concat(variables('assetLocation'),'/PrepareWFEServer.ps1.zip')]",
     "wfePreparationFunction": "PrepareWFEServer.ps1\\PrepareWFEServer",
     "storageAccountSetupURL": "[concat(parameters('baseUrl'),'/storageAccount.json')]",
+     "creatingPublicIPsUrl": "[concat(parameters('baseUrl'),'/creatingPublicIPs.json')]",
     "vnetwithDNSTemplateUrl": "[concat(parameters('baseUrl'),'/vnet-with-dns-server.json')]",
+    "CreatingAvailabilitySetsUrl": "[concat(parameters('baseUrl'),'/availabilitySets.json')]",
     "vnetSetupURL": "[concat(parameters('baseUrl'),'/vnet-new.json')]",
+    "setupLBsUrl": "[concat(parameters('baseUrl'),'/loadBalancers.json')]",
     "creatingNICSUrl": "[concat(parameters('baseUrl'),'/creatingNICS.json')]",
     "ProvisioningADDomainControllerUrl": "[concat(parameters('baseUrl'),'/provisioningDomainController.json')]",
     "ProvisioningSQLUrl": "[concat(parameters('baseUrl'),'/provisioningSQL.json')]",
@@ -252,6 +249,46 @@
           },
           "storageAccountNamePrefix": {
             "value": "[parameters('storageAccountNamePrefix')]"
+          }
+        }
+      }
+    },
+    {
+      "name": "SettingUpPublicIPs",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-01-01",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('creatingPublicIPsUrl')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "adpublicIPAddressName": {
+            "value": "[variables('publicIPAddressName')]"
+          }
+        }
+      }
+    },
+     {
+      "name": "CreatingAvailabilitySets",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-01-01",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('CreatingAvailabilitySetsUrl')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "AvailabilitySetName": {
+            "value": "[variables('AvailabilitySetName')]"
           }
         }
       }
@@ -313,11 +350,47 @@
       }
     },
     {
+      "name": "SettingUpLoadBalancers",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-01-01",
+      "dependsOn": [
+        "Microsoft.Resources/deployments/SettingUpPublicIPs"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('setupLBsUrl')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "LBFE": {
+            "value": "[variables('LBFE')]"
+          },
+          "LBBE": {
+            "value": "[variables('LBBE')]"
+          },
+          "RDPNAT": {
+            "value": "[variables('RDPNAT')]"
+          },
+          "lbName": {
+            "value": "[variables('lbName')]"
+          },
+                   "PublicIpResourceId": {
+            "value": "[reference('SettingUpPublicIPs').outputs.PublicIpResourceId.value]"
+          }
+       }
+      }
+    },
+    {
       "name": "CreatingNetworkInterfaces",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
       "dependsOn": [
-        "Microsoft.Resources/deployments/SettingUpVirtualNetwork"
+        "Microsoft.Resources/deployments/SettingUpVirtualNetwork",
+        "Microsoft.Resources/deployments/SettingUpLoadBalancers"
       ],
       "properties": {
         "mode": "Incremental",
@@ -328,6 +401,18 @@
         "parameters": {
           "location": {
             "value": "[parameters('location')]"
+          },
+          "BEAddressPoolID": {
+            "value": "[variables('BEAddressPoolID')]"
+          },
+          "RDPNATRuleID": {
+            "value": "[variables('RDPNATRuleID')]"
+          },
+          "LBBE": {
+           "value": "[variables('LBBE')]"
+          },
+          "RDPNAT": {
+            "value": "[variables('RDPNAT')]"
           },
           "adNicName": {
             "value": "[variables('adNicName')]"
@@ -349,19 +434,7 @@
           },
           "wfeNicIPAddress": {
             "value": "[parameters('wfeNicIPAddress')]"
-          },
-          "adpublicIPAddressName": {
-             "value": "[parameters('adpublicIPAddressname')]"
-              },
-          "sqlpublicIPAddressName": {
-             "value": "[parameters('sqlpublicIPAddressname')]"
-              },
-          "wfepublicIPAddressName": {
-             "value": "[parameters('wfepublicIPAddressname')]"
-              },
-          "publicIPAddressType": { 
-             "value": "[parameters('publicIPAddressType')]"
-           }
+          }
         }
       }
       },
@@ -371,7 +444,9 @@
         "apiVersion": "2015-01-01",
         "dependsOn": [
           "Microsoft.Resources/deployments/SettingUpStorageAccount",
-          "Microsoft.Resources/deployments/CreatingNetworkInterfaces"
+          "Microsoft.Resources/deployments/CreatingNetworkInterfaces",
+          "Microsoft.Resources/deployments/CreatingAvailabilitySets",
+          "Microsoft.Resources/deployments/SettingUpLoadBalancers"
          ],
         "properties": {
           "mode": "Incremental",
@@ -389,6 +464,9 @@
             "adVMSize": {
               "value": "[parameters('adVMSize')]"
             },
+            "adAvailabilitySetName": {
+            "value": "[variables('AvailabilitySetName')]"
+          },
             "adminUsername": {
               "value": "[parameters('adminUsername')]"
             },
@@ -425,7 +503,9 @@
         "apiVersion": "2015-01-01",
         "dependsOn": [
           "Microsoft.Resources/deployments/SettingUpStorageAccount",
-          "Microsoft.Resources/deployments/CreatingNetworkInterfaces"
+          "Microsoft.Resources/deployments/CreatingNetworkInterfaces",
+          "Microsoft.Resources/deployments/CreatingAvailabilitySets",
+          "Microsoft.Resources/deployments/SettingUpLoadBalancers"
         ],
         "properties": {
           "mode": "Incremental",
@@ -443,6 +523,9 @@
             "sqlVMSize": {
               "value": "[parameters('sqlVMSize')]"
             },
+            "AvailabilitySetName": {
+            "value": "[variables('AvailabilitySetName')]"
+          },
             "adminUsername": {
               "value": "[parameters('adminUsername')]"
             },
@@ -479,7 +562,9 @@
         "apiVersion": "2015-01-01",
         "dependsOn": [
           "Microsoft.Resources/deployments/SettingUpStorageAccount",
-          "Microsoft.Resources/deployments/CreatingNetworkInterfaces"
+          "Microsoft.Resources/deployments/CreatingNetworkInterfaces",
+          "Microsoft.Resources/deployments/CreatingAvailabilitySets",
+          "Microsoft.Resources/deployments/SettingUpLoadBalancers"
         ],
         "properties": {
           "mode": "Incremental",
@@ -503,6 +588,9 @@
             "adminPassword": {
               "value": "[parameters('adminPassword')]"
             },
+            "AvailabilitySetName": {
+            "value": "[variables('AvailabilitySetName')]"
+          },
             "storageAccountNamePrefix": {
               "value": "[parameters('storageAccountNamePrefix')]"
             },

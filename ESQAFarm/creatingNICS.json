@@ -8,6 +8,18 @@
     "VMSubnetRef": {
       "type": "string"
     },
+    "BEAddressPoolID": {
+      "type": "string"
+    },
+    "RDPNATRuleID": {
+      "type": "string"
+    },
+     "LBBE": {
+      "type": "string"
+    },
+    "RDPNAT": {
+      "type": "string"
+    },
     "adNicName": {
       "type": "string"
     },
@@ -17,103 +29,36 @@
     "wfeNicName": {
       "type": "string"
     },
-    "wfeNicIPAddress": {
-      "type": "string"
-    },
-    "sqlNicIPAddress": {
-      "type": "string"
-    },
     "sqlNicName": {
     "type": "string"
-    },
-    "adpublicIPAddressName": {
-      "type": "string"
-      },
-    "sqlpublicIPAddressName": {
-      "type": "string"
-    },
-    "wfepublicIPAddressName": {
-      "type": "string"
-    },
-    "publicIPAddressType": { 
-      "type": "string"
     }
     },
-   "resources": [
-    {
-      "apiVersion": "2015-06-15",
-      "type": "Microsoft.Network/publicIPAddresses",
-      "name": "[parameters('adpublicIPAddressName')]",
-      "location": "[parameters('location')]",
-      "properties": {
-        "publicIPAllocationMethod": "[parameters('publicIPAddressType')]"
-      }
-    },
-    {
-      "apiVersion": "2015-06-15",
-      "type": "Microsoft.Network/publicIPAddresses",
-      "name": "[parameters('sqlpublicIPAddressName')]",
-      "location": "[parameters('location')]",
-      "properties": {
-        "publicIPAllocationMethod": "[parameters('publicIPAddressType')]"
-      }
-    },
-    {
-      "apiVersion": "2015-06-15",
-      "type": "Microsoft.Network/publicIPAddresses",
-      "name": "[parameters('wfepublicIPAddressName')]",
-      "location": "[parameters('location')]",
-      "properties": {
-        "publicIPAllocationMethod": "[parameters('publicIPAddressType')]"
-      }
-    },
+  "resources": [
     {
       "name": "[parameters('adNicName')]",
       "type": "Microsoft.Network/networkInterfaces",
       "location": "[parameters('location')]",
       "apiVersion": "2015-06-15",
-      "dependsOn": [ 
-       "[concat('Microsoft.Network/publicIPAddresses/', parameters('adpublicIPAddressName'))]" 
-       ], 
       "properties": {
         "ipConfigurations": [
           {
             "name": "ipconfig1",
-             "properties": { 
-              "publicIPAddress": { 
-                "id": "[resourceId ('Microsoft.Network/publicIPAddresses/', parameters('adpublicIPAddressName'))]" 
-              }, 
+            "properties": {
               "privateIPAllocationMethod": "Static",
               "privateIPAddress": "[parameters('adNicIPAddress')]",
               "subnet": {
-                "id": "[parameters('VMSubnetRef')]"
-              }
-              }
-          }
-        ]
-      }
-    },
-    {  
-      "name": "[parameters('wfeNicName')]",
-      "type": "Microsoft.Network/networkInterfaces",
-      "location": "[parameters('location')]",
-      "apiVersion": "2015-06-15",
-       "dependsOn": [ 
-       "[concat('Microsoft.Network/publicIPAddresses/', parameters('wfepublicIPAddressName'))]" 
-       ],
-      "properties": {
-        "ipConfigurations": [
-          {
-            "name": "ipconfig1",
-            "properties": { 
-            "publicIPAddress": { 
-               "id": "[resourceId ('Microsoft.Network/publicIPAddresses/', parameters('wfepublicIPAddressName'))]" 
-              }, 
-           "privateIPAllocationMethod": "Static",
-              "privateIPAddress": "[parameters('wfeNicIPAddress')]",
-              "subnet": {
-                "id": "[parameters('VMSubnetRef')]"
-              }
+                "id": "[parameters('vmSubnetRef')]"
+              },
+              "loadBalancerBackendAddressPools": [
+                {
+                  "id": "[parameters('BEAddressPoolID')]"
+                }
+              ],
+              "loadBalancerInboundNatRules": [
+                {
+                  "id": "[parameters('RDPNATRuleID')]"
+                }
+              ]
             }
           }
         ]
@@ -124,22 +69,54 @@
       "type": "Microsoft.Network/networkInterfaces",
       "location": "[parameters('location')]",
       "apiVersion": "2015-06-15",
-       "dependsOn": [ 
-       "[concat('Microsoft.Network/publicIPAddresses/', parameters('sqlpublicIPAddressName'))]" 
-       ],
       "properties": {
         "ipConfigurations": [
           {
             "name": "ipconfig1",
             "properties": {
-              "publicIPAddress": { 
-               "id": "[resourceId ('Microsoft.Network/publicIPAddresses/', parameters('sqlpublicIPAddressName'))]" 
-               }, 
-              "privateIPAllocationMethod": "Static",
-              "privateIPAddress": "[parameters('sqlNicIPAddress')]",
+              "privateIPAllocationMethod": "Dynamic",
               "subnet": {
-                "id": "[parameters('VMSubnetRef')]"
-              }
+                "id": "[parameters('vmSubnetRef')]"
+              },
+              "loadBalancerBackendAddressPools": [
+                {
+                  "id": "[parameters('BEAddressPoolID')]"
+                }
+              ],
+              "loadBalancerInboundNatRules": [
+                {
+                  "id": "[parameters('RDPNATRuleID')]"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "[parameters('wfeNicName')]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "location": "[parameters('location')]",
+      "apiVersion": "2015-06-15",
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[parameters('vmSubnetRef')]"
+              },
+              "loadBalancerBackendAddressPools": [
+                {
+                  "id": "[parameters('BEAddressPoolID')]"
+                }
+              ],
+              "loadBalancerInboundNatRules": [
+                {
+                  "id": "[parameters('RDPNATRuleID')]"
+                }
+              ]
             }
           }
         ]
