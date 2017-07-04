@@ -24,7 +24,7 @@
     }
   ],
   "outputs": {
-    "adPublicIpResourceId": {
+    "PublicIpResourceId": {
       "type": "string",
       "value": "[resourceId('Microsoft.Network/publicIPAddresses',parameters('publicIPAddressName'))]"
     }
