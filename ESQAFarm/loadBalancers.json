@@ -57,7 +57,7 @@
                 "id": "[concat(resourceid(resourceGroup().name,'Microsoft.Network/loadBalancers',parameters('LBName')), '/frontendIPConfigurations/',parameters('LBFE'))]"
               },
               "protocol": "tcp",
-              "frontendPort": 5444,
+              "frontendPort": 55444,
               "backendPort": 3389,
               "enableFloatingIP": false
             }
@@ -69,7 +69,7 @@
                 "id": "[concat(resourceid(resourceGroup().name,'Microsoft.Network/loadBalancers',parameters('LBName')), '/frontendIPConfigurations/',parameters('LBFE'))]"
               },
               "protocol": "tcp",
-              "frontendPort": 5445,
+              "frontendPort": 55445,
               "backendPort": 3389,
               "enableFloatingIP": false
             }
@@ -81,7 +81,7 @@
                 "id": "[concat(resourceid(resourceGroup().name,'Microsoft.Network/loadBalancers',parameters('LBName')), '/frontendIPConfigurations/',parameters('LBFE'))]"
               },
               "protocol": "tcp",
-              "frontendPort": 5446,
+              "frontendPort": 55446,
               "backendPort": 3389,
               "enableFloatingIP": false
             }
