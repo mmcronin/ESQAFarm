@@ -2,6 +2,20 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
+    "osDiskVhdUri": { 
+      "type": "string", 
+      "defaultValue": "https://cwvmbasesdisks382.blob.core.windows.net/vhds/SP2016-QA-Base20170705161333.vhd",
+      "metadata": { 
+        "Description": "Uri of your user image" 
+       }
+    },
+      "osType": {
+       "type": "string",
+       "defaultValue": "Windows",
+        "metadata": { 
+         "Description": "This is the OS that your VM will be running" 
+        }
+      } ,
     "location": {
       "type": "string"
     },
@@ -50,26 +64,24 @@
           "id": "[resourceId('Microsoft.Compute/availabilitySets', parameters('AvailabilitySetName'))]"
         },
           "osProfile": {
-          "computername": "[parameters('wfeVMName')]",
+          "computerName": "[parameters('wfeVMName')]",
           "adminUsername": "[parameters('adminUsername')]",
           "adminPassword": "[parameters('adminPassword')]"
         },
         "storageProfile": {
-          "imageReference": {
-            "publisher": "MicrosoftSharepoint",
-            "offer": "MicrosoftSharepointServer",
-            "sku": "2016",
-            "version": "latest"
-          },
           "osDisk": {
+            "createOption": "FromImage",
             "name": "osdisk",
+             "osType": "[parameters('osType')]",
+             "caching": "ReadWrite",
+             "image": {
+                    "uri": "[parameters('osDiskVhdUri')]"
+                     },
             "vhd": {
               "uri": "[concat('http://',parameters('storageAccountNamePrefix'),'1.blob.core.windows.net/vhds/',parameters('wfeVMName'),'-osdisk.vhd')]"
-            },
-            "caching": "ReadWrite",
-            "createOption": "FromImage"
-          }
-            },
+            }
+           }
+        },
          "networkProfile": {
           "networkInterfaces": [
             {
