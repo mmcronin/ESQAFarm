@@ -50,7 +50,7 @@
           {
             "name": "ipconfig1",
             "properties": {
-              "privateIPAllocationMethod": "Dynamic",
+              "privateIPAllocationMethod": "Static",
               "privateIPAddress": "[parameters('adNicIPAddress')]",
               "subnet": {
                 "id": "[parameters('vmSubnetRef')]"
@@ -80,7 +80,7 @@
           {
             "name": "ipconfig1",
             "properties": {
-              "privateIPAllocationMethod": "Dynamic",
+              "privateIPAllocationMethod": "Static",
               "privateIPAddress": "[parameters('sqlNicIPAddress')]",
               "subnet": {
                 "id": "[parameters('vmSubnetRef')]"
@@ -110,7 +110,7 @@
           {
             "name": "ipconfig1",
             "properties": {
-              "privateIPAllocationMethod": "Dynamic",
+              "privateIPAllocationMethod": "Static",
               "privateIPAddress": "[parameters('wfeNicIPAddress')]",
               "subnet": {
                 "id": "[parameters('vmSubnetRef')]"

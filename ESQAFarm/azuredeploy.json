@@ -519,8 +519,7 @@
           "Microsoft.Resources/deployments/SettingUpStorageAccount",
           "Microsoft.Resources/deployments/CreatingNetworkInterfaces",
           "Microsoft.Resources/deployments/CreatingAvailabilitySets",
-          "Microsoft.Resources/deployments/SettingUpLoadBalancers",
-          "Microsoft.Resources/deployments/deployments/ProvisioningADDomainController"
+          "Microsoft.Resources/deployments/SettingUpLoadBalancers"
         ],
         "properties": {
           "mode": "Incremental",
@@ -579,9 +578,8 @@
           "Microsoft.Resources/deployments/SettingUpStorageAccount",
           "Microsoft.Resources/deployments/CreatingNetworkInterfaces",
           "Microsoft.Resources/deployments/CreatingAvailabilitySets",
-          "Microsoft.Resources/deployments/SettingUpLoadBalancers",
-          "Microsoft.Resources/deployments/deployments/ProvisioningADDomainController"
-        ],
+          "Microsoft.Resources/deployments/SettingUpLoadBalancers"
+         ],
         "properties": {
           "mode": "Incremental",
           "templateLink": {
