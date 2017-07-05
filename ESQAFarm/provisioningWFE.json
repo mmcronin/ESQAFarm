@@ -56,9 +56,9 @@
         },
         "storageProfile": {
           "imageReference": {
-            "publisher": "MicrosoftWindowsServer",
-            "offer": "WindowsServer",
-            "sku": "2016-Datacenter",
+            "publisher": "MicrosoftSharepoint",
+            "offer": "MicrosoftSharepointServer",
+            "sku": "2016",
             "version": "latest"
           },
           "osDisk": {
