@@ -619,6 +619,9 @@
             "wfeNicName": {
               "value": "[variables('wfeNicName')]"
             },
+            "ImageName": {
+              "value": "[parameters('ImageName')]"
+            },
             "WFEosDiskUri": {
               "value": "[parameters('WFEosDiskUri')]"
             },
