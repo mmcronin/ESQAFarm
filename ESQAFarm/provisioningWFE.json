@@ -46,7 +46,7 @@
      {
       "type": "Microsoft.Compute/images",
       "apiVersion": "2016-04-30-preview",
-      "name": "[parameters('wfeVMName')]",
+      "name": "[parameters('ImageName')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "storageProfile": {
@@ -62,7 +62,7 @@
     {
       "apiVersion": "2015-06-15",
       "type": "Microsoft.Compute/virtualMachines",
-      "name": "[parameters('ImageName')]",
+      "name": "[parameters('WFEVMName')]",
       "location": "[parameters('location')]",
       "properties": {
         "hardwareProfile": {
