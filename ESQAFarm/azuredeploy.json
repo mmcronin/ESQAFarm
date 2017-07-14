@@ -162,6 +162,14 @@
         "description": "The type of the Storage Account created"
       },
       "defaultValue": "Premium_LRS"
+    },
+    "ImageName": {
+      "type": "string",
+       "defaultValue": "WFEOSDiskImage"
+    },
+      "WFEosDiskUri": {
+      "type": "string",
+      "defaultValue": "https://michaeltestrg445363836.blob.core.windows.net/vhds/SP-Base20170713145420.vhd"
     }
   },
   "variables": {
@@ -610,6 +618,9 @@
             },
             "wfeNicName": {
               "value": "[variables('wfeNicName')]"
+            },
+            "WFEosDiskUri": {
+              "value": "[parameters('WFEosDiskUri')]"
             },
             "wfePrepareModulesURL": {
               "value": "[variables('wfePrepareModulesURL')]"
