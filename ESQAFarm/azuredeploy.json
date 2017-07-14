@@ -11,14 +11,14 @@
     },
      "NSGName": {
       "type": "string",
-      "defaultValue": "MCESQAVNET-Subnet"
+      "defaultValue": "ESQAVNET-Subnet"
     },
     "virtualNetworkName": {
       "type": "string",
       "metadata": {
         "description": "The name of the Virtual Network to Create"
       },
-      "defaultValue": "MCESQAVNET"
+      "defaultValue": "ESQAVNET"
     },
     "virtualNetworkAddressRange": {
       "type": "string",
@@ -32,7 +32,7 @@
       "metadata": {
         "description": "The name of the Domain Controller"
       },
-      "defaultValue": "MCESQA-DC"
+      "defaultValue": "ESQA-DC"
     },
     "VMSubnet": {
       "type": "string",
@@ -87,7 +87,7 @@
       "metadata": {
         "description": "The name of the Domain Controller"
       },
-      "defaultValue": "MCESQA-SQL"
+      "defaultValue": "ESQA-SQL"
     },
     "sqlVMSize": {
       "type": "string",
@@ -114,7 +114,7 @@
       "metadata": {
         "description": "The name of the WFE"
       },
-      "defaultValue": "MCESQA-WFE"
+      "defaultValue": "ESQA-WFE"
     },
     "wfeVMSize": {
       "type": "string",
@@ -146,12 +146,20 @@
       },
       "defaultValue": "https://raw.githubusercontent.com/mmcronin/ESQAfarm/master/ESQAFarm/"
     },
+    "WFEVhdUri": {
+      "type": "string",
+      "metadata": {
+        "artifactsBaseUrl": "",
+        "description": "URL to acquire other templates"
+      },
+      "defaultValue": "https://michaeltestrg445363836.blob.core.windows.net/vhds/SP-Base20170713145420.vhd"
+    },
     "storageAccountNamePrefix": {
       "type": "string",
       "metadata": {
         "description": "Name prefix of the new storage account created to store the VMs disks"
       },
-      "defaultValue": "mcesqasta"
+      "defaultValue": "esqasta"
     },
     "storageAccountType": {
       "type": "string",
@@ -162,14 +170,6 @@
         "description": "The type of the Storage Account created"
       },
       "defaultValue": "Premium_LRS"
-    },
-    "ImageName": {
-      "type": "string",
-       "defaultValue": "WFEOSDiskImage"
-    },
-      "WFEosDiskUri": {
-      "type": "string",
-      "defaultValue": "https://michaeltestrg445363836.blob.core.windows.net/vhds/SP-Base20170713145420.vhd"
     }
   },
   "variables": {
@@ -616,14 +616,11 @@
             "storageAccountNamePrefix": {
               "value": "[parameters('storageAccountNamePrefix')]"
             },
+            "wfeVhdUri": {
+              "value": "[parameters('wfeVhdUri')]"
+            },
             "wfeNicName": {
               "value": "[variables('wfeNicName')]"
-            },
-            "ImageName": {
-              "value": "[parameters('ImageName')]"
-            },
-            "WFEosDiskUri": {
-              "value": "[parameters('WFEosDiskUri')]"
             },
             "wfePrepareModulesURL": {
               "value": "[variables('wfePrepareModulesURL')]"

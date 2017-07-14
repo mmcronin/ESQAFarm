@@ -35,30 +35,11 @@
     "DNSServerAddress": {
       "type": "string"
     },
-    "WFEosDiskUri": {
-      "type": "string"
-    },
-    "ImageName": {
+    "WFEVhdUri": {
       "type": "string"
     }
-  },
+   },
   "resources": [
-     {
-      "type": "Microsoft.Compute/images",
-      "apiVersion": "2016-04-30-preview",
-      "name": "[parameters('ImageName')]",
-      "location": "[resourceGroup().location]",
-      "properties": {
-        "storageProfile": {
-          "osDisk": {
-            "osType": "Windows",
-            "osState": "Generalized",
-            "blobUri": "[parameters('WFEosDiskUri')]",
-            "storageAccountType": "Premium_LRS"
-          }
-        }
-      }
-    },
     {
       "apiVersion": "2015-06-15",
       "type": "Microsoft.Compute/virtualMachines",
@@ -77,9 +58,19 @@
           "adminPassword": "[parameters('adminPassword')]"
         },
         "storageProfile": {
-          "imageReference": {
-            "id": "[resourceId('Microsoft.Compute/images', parameters('imageName'))]"
+          "osDisk": {
+            "name": "[concat(parameters('WFEVMName'),'-osDisk')]",
+            "osType": "Windows",
+            "caching": "ReadWrite",
+            "createOption": "FromImage",
+            "image": {
+              "uri": "[parameters('wfeVhdUri')]"
+            },
+            "vhd": {
+              "uri": "[concat('https://michaeltestrg445363836.blob.core.windows.net/vhds/',parameters('wfeVMName'),'-osdisk.vhd')]"
+            }
           }
+
           },
          "networkProfile": {
           "networkInterfaces": [
