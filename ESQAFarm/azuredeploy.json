@@ -11,14 +11,14 @@
     },
      "NSGName": {
       "type": "string",
-      "defaultValue": "ESQAVNET-Subnet"
+      "defaultValue": "MCESQAVNET-Subnet"
     },
     "virtualNetworkName": {
       "type": "string",
       "metadata": {
         "description": "The name of the Virtual Network to Create"
       },
-      "defaultValue": "ESQAVNET"
+      "defaultValue": "MCESQAVNET"
     },
     "virtualNetworkAddressRange": {
       "type": "string",
@@ -32,7 +32,7 @@
       "metadata": {
         "description": "The name of the Domain Controller"
       },
-      "defaultValue": "ESQA-DC"
+      "defaultValue": "MCESQA-DC"
     },
     "VMSubnet": {
       "type": "string",
@@ -87,7 +87,7 @@
       "metadata": {
         "description": "The name of the Domain Controller"
       },
-      "defaultValue": "ESQA-SQL"
+      "defaultValue": "MCESQA-SQL"
     },
     "sqlVMSize": {
       "type": "string",
@@ -114,7 +114,7 @@
       "metadata": {
         "description": "The name of the WFE"
       },
-      "defaultValue": "ESQA-WFE"
+      "defaultValue": "MCESQA-WFE"
     },
     "wfeVMSize": {
       "type": "string",
@@ -159,7 +159,7 @@
       "metadata": {
         "description": "Name prefix of the new storage account created to store the VMs disks"
       },
-      "defaultValue": "esqasta"
+      "defaultValue": "mcesqasta"
     },
     "storageAccountType": {
       "type": "string",
