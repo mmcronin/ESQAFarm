@@ -287,6 +287,8 @@
     "sqlPreparationFunction": "PrepareSqlServer.ps1\\PrepareSqlServer",
     "wfePrepareModulesURL": "[concat(variables('assetLocation'),'/PrepareWFEServer.ps1.zip')]",
     "wfePreparationFunction": "PrepareWFEServer.ps1\\PrepareWFEServer",
+    "spConfigureModulesURL": "[concat(variables('assetLocation'),'/ConfigureSharePointServer.ps1.zip')]",
+    "spConfigurationFunction": "ConfigureSharePointServer.ps1\\ConfigureSharePointServer",
     "storageAccountSetupURL": "[concat(parameters('baseUrl'),'/storageAccount.json')]",
     "creatingPublicIPsUrl": "[concat(parameters('baseUrl'),'/creatingPublicIPs.json')]",
     "vnetwithDNSTemplateUrl": "[concat(parameters('baseUrl'),'/vnet-with-dns-server.json')]",
@@ -299,9 +301,7 @@
     "configuringSQLUrl": "[concat(parameters('baseUrl'),'/configuringSQL.json')]",
     "ProvisioningWFEUrl": "[concat(parameters('baseUrl'),'/provisioningWFE.json')]",
     "configuringWFEUrl": "[concat(parameters('baseUrl'),'/configuringWFE.json')]",
-    "configuringSPUrl": "[concat(parameters('baseUrl'),'/configuringSharepoint.json')]",
-    "spConfigureModulesURL": "[concat(variables('assetLocation'),'/ConfigureSharePointServer.ps1.zip')]",
-    "spConfigurationFunction": "ConfigureSharePointServer.ps1\\ConfigureSharePointServer"
+    "configuringSPUrl": "[concat(parameters('baseUrl'),'/configuringSharePoint.json')]"
   },
   "resources": [
     {
