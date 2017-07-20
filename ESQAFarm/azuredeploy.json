@@ -299,8 +299,6 @@
     "configuringSQLUrl": "[concat(parameters('baseUrl'),'/configuringSQL.json')]",
     "ProvisioningWFEUrl": "[concat(parameters('baseUrl'),'/provisioningWFE.json')]",
     "configuringWFEUrl": "[concat(parameters('baseUrl'),'/configuringWFE.json')]",
-    "wfeConfigureModulesURL": "[concat(variables('assetLocation'),'/ConfigureWFEServer.ps1.zip')]",
-    "wfeConfigurationFunction": "ConfigureSharePointServer.ps1\\ConfigureWFEServer",
     "configuringSPUrl": "[concat(parameters('baseUrl'),'/configuringSharepoint.json')]",
     "spConfigureModulesURL": "[concat(variables('assetLocation'),'/ConfigureSharePointServer.ps1.zip')]",
     "spConfigurationFunction": "ConfigureSharePointServer.ps1\\ConfigureSharePointServer"
