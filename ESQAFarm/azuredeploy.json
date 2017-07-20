@@ -300,7 +300,10 @@
     "ProvisioningWFEUrl": "[concat(parameters('baseUrl'),'/provisioningWFE.json')]",
     "configuringWFEUrl": "[concat(parameters('baseUrl'),'/configuringWFE.json')]",
     "wfeConfigureModulesURL": "[concat(variables('assetLocation'),'/ConfigureWFEServer.ps1.zip')]",
-    "wfeConfigurationFunction": "ConfigureSharePointServer.ps1\\ConfigureWFEServer"
+    "wfeConfigurationFunction": "ConfigureSharePointServer.ps1\\ConfigureWFEServer",
+    "configuringSPUrl": "[concat(parameters('baseUrl'),'/configuringSharepoint.json')]",
+    "spConfigureModulesURL": "[concat(variables('assetLocation'),'/ConfigureSharePointServer.ps1.zip')]",
+    "spConfigurationFunction": "ConfigureSharePointServer.ps1\\ConfigureSharePointServer"
   },
   "resources": [
     {
@@ -781,7 +784,7 @@
           }
         }
       },
-         {
+      {
         "name": "ConfiguringWFEServerVM",
         "type": "Microsoft.Resources/deployments",
         "apiVersion": "2015-01-01",
@@ -799,11 +802,46 @@
             "location": {
               "value": "[parameters('location')]"
             },
-            "wfeConfgureModulesURL": {
-            "value": "[variables('wfeConfigureModulesURL')]"
+            "wfeVMName": {
+              "value": "[variables('wfeVMName')]"
+            },
+            "adminUsername": {
+              "value": "[parameters('adminUsername')]"
+            },
+            "adminPassword": {
+              "value": "[parameters('adminPassword')]"
+            },
+            "ouPath": {
+              "value": "[parameters('ouPath')]"
+            },
+              "domainName": {
+              "value": "[parameters('domainName')]"
+            }
+            }
+        }
+      },
+         {
+        "name": "ConfiguringSharepoint",
+        "type": "Microsoft.Resources/deployments",
+        "apiVersion": "2015-01-01",
+        "dependsOn": [
+          "Microsoft.Resources/deployments/ConfiguringWFEServerVM"
+          ],
+        "properties": {
+          "mode": "Incremental",
+          "templateLink": {
+            "uri": "[variables('configuringSPUrl')]",
+            "contentVersion": "1.0.0.0"
           },
-          "wfeConfigurationFunction": {
-            "value": "[variables('wfeConfigurationFunction')]"
+          "parameters": {
+            "location": {
+              "value": "[parameters('location')]"
+            },
+            "spConfgureModulesURL": {
+            "value": "[variables('spConfigureModulesURL')]"
+          },
+          "spConfigurationFunction": {
+            "value": "[variables('spConfigurationFunction')]"
           },
             "wfeVMName": {
               "value": "[variables('wfeVMName')]"
@@ -827,16 +865,16 @@
             "value": "[parameters('sharePointFarmAccountPassword')]"
           },
            "sharePointWebPoolManagedAccountUserName": {
-            "value": "[parameters('sharePointFarmAccountUserName')]"
+            "value": "[parameters('sharePointWebPoolManagedAccountUserName')]"
           },
           "sharePointWebPoolManagedAccountPassword": {
-            "value": "[parameters('sharePointFarmAccountPassword')]"
+            "value": "[parameters('sharePointWebPoolManagedAccountPassword')]"
           },
           "sharePointServicePoolManagedAccountUserName": {
-            "value": "[parameters('sharePointFarmAccountUserName')]"
+            "value": "[parameters('sharePointServicePoolManagedAccountUserName')]"
           },
           "sharePointServicePoolManagedAccountPassword": {
-            "value": "[parameters('sharePointFarmAccountPassword')]"
+            "value": "[parameters('sharePointServicePoolManagedAccountPassword')]"
           },
           "sharePointFarmPassphrasePassword": {
             "value": "[parameters('sharePointFarmPassphrasePassword')]"
