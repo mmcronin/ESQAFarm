@@ -122,6 +122,51 @@
         "description": "The Sharepoint Setup account password"
       }
     },
+    "sharePointFarmAccountUserName": {
+      "type": "string",
+      "metadata": {
+        "description": "The Sharepoint Farm account name"
+      },
+      "defaultValue": "sp_farm"
+    },
+    "sharePointFarmAccountPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "The Sharepoint Farm account password"
+      }
+    },
+     "sharePointWebPoolManagedAccountName": {
+      "type": "string",
+      "metadata": {
+        "description": "The Sharepoint Web Pool Account"
+      },
+      "defaultValue": "sp_webpool"
+    },
+    "sharePointWebPoolManagedAccountNPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "The Sharepoint Web Pool account password"
+      }
+    },
+    "sharePointServicePoolManagedAccountName": {
+      "type": "string",
+      "metadata": {
+        "description": "The Sharepoint Service Pool Account"
+      },
+      "defaultValue": "sp_servicepool"
+    },
+    "sharePointServicePoolManagedAccountNPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "The Sharepoint Service Pool account password"
+      }
+    },
+    "sharePointFarmPassphrasePassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "The Sharepoint Farm Passphrase"
+      }
+    },
     "wfeVmName": {
       "type": "string",
       "metadata": {
@@ -253,7 +298,9 @@
     "ProvisioningSQLUrl": "[concat(parameters('baseUrl'),'/provisioningSQL.json')]",
     "configuringSQLUrl": "[concat(parameters('baseUrl'),'/configuringSQL.json')]",
     "ProvisioningWFEUrl": "[concat(parameters('baseUrl'),'/provisioningWFE.json')]",
-    "configuringWFEUrl": "[concat(parameters('baseUrl'),'/configuringWFE.json')]"
+    "configuringWFEUrl": "[concat(parameters('baseUrl'),'/configuringWFE.json')]",
+    "wfeConfigureModulesURL": "[concat(variables('assetLocation'),'/ConfigureWFEServer.ps1.zip')]",
+    "wfeConfigurationFunction": "ConfigureSharePointServer.ps1\\ConfigureWFEServer"
   },
   "resources": [
     {
@@ -752,6 +799,12 @@
             "location": {
               "value": "[parameters('location')]"
             },
+            "wfeConfgureModulesURL": {
+            "value": "[variables('wfeConfigureModulesURL')]"
+          },
+          "wfeConfigurationFunction": {
+            "value": "[variables('wfeConfigurationFunction')]"
+          },
             "wfeVMName": {
               "value": "[variables('wfeVMName')]"
             },
@@ -761,6 +814,33 @@
             "adminPassword": {
               "value": "[parameters('adminPassword')]"
             },
+            "sharePointSetupUserAccountUserName": {
+            "value": "[parameters('sharePointSetupUserAccountUserName')]"
+          },
+           "sharePointSetupUserAccountPassword": {
+            "value": "[parameters('sharePointSetupUserAccountPassword')]"
+          },
+          "sharePointFarmAccountUserName": {
+            "value": "[parameters('sharePointFarmAccountUserName')]"
+          },
+          "sharePointFarmAccountPassword": {
+            "value": "[parameters('sharePointFarmAccountPassword')]"
+          },
+           "sharePointWebPoolManagedAccountUserName": {
+            "value": "[parameters('sharePointFarmAccountUserName')]"
+          },
+          "sharePointWebPoolManagedAccountPassword": {
+            "value": "[parameters('sharePointFarmAccountPassword')]"
+          },
+          "sharePointServicePoolManagedAccountUserName": {
+            "value": "[parameters('sharePointFarmAccountUserName')]"
+          },
+          "sharePointServicePoolManagedAccountPassword": {
+            "value": "[parameters('sharePointFarmAccountPassword')]"
+          },
+          "sharePointFarmPassphrasePassword": {
+            "value": "[parameters('sharePointFarmPassphrasePassword')]"
+          },
               "domainName": {
               "value": "[parameters('domainName')]"
             }
