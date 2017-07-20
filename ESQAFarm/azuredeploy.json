@@ -135,27 +135,27 @@
         "description": "The Sharepoint Farm account password"
       }
     },
-     "sharePointWebPoolManagedAccountName": {
+     "sharePointWebPoolManagedAccountUserName": {
       "type": "string",
       "metadata": {
         "description": "The Sharepoint Web Pool Account"
       },
       "defaultValue": "sp_webpool"
     },
-    "sharePointWebPoolManagedAccountNPassword": {
+    "sharePointWebPoolManagedAccountPassword": {
       "type": "securestring",
       "metadata": {
         "description": "The Sharepoint Web Pool account password"
       }
     },
-    "sharePointServicePoolManagedAccountName": {
+    "sharePointServicePoolManagedAccountUserName": {
       "type": "string",
       "metadata": {
         "description": "The Sharepoint Service Pool Account"
       },
       "defaultValue": "sp_servicepool"
     },
-    "sharePointServicePoolManagedAccountNPassword": {
+    "sharePointServicePoolManagedAccountPassword": {
       "type": "securestring",
       "metadata": {
         "description": "The Sharepoint Service Pool account password"

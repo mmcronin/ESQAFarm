@@ -32,13 +32,13 @@
      "sharePointFarmAccountPassword": {
       "type": "securestring"
     },
-     "sharePointWebPoolManagedAccountName": {
+     "sharePointWebPoolManagedAccountUserName": {
       "type": "string"
     },
     "sharePointWebPoolManagedAccountPassword": {
       "type": "securestring"
     },
-    "sharePointServicePoolManagedAccountName": {
+    "sharePointServicePoolManagedAccountUSerName": {
       "type": "string"
     },
     "sharePointServicePoolManagedAccountPassword": {
@@ -107,11 +107,11 @@
               "Password": "PrivateSettingsRef:SharePointFarmAccountPassword"
             },
              "WebPoolManagedAccountcreds": {
-              "UserName": "[parameters('sharePointWebPoolManagedAccountName')]",
+              "UserName": "[parameters('sharePointWebPoolManagedAccountUserName')]",
               "Password": "PrivateSettingsRef:SharePointWebPoolManagedAccountPassword"
             },
             "ServicePoolManagedAccountcreds": {
-              "UserName": "[parameters('sharePointServicePoolManagedAccountName')]",
+              "UserName": "[parameters('sharePointServicePoolManagedAccountUserName')]",
               "Password": "PrivateSettingsRef:SharePointServicePoolManagedAccountPassword"
             },
             "Passphrasecreds": {
