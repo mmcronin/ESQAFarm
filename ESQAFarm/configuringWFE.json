@@ -38,7 +38,7 @@
     "sharePointWebPoolManagedAccountPassword": {
       "type": "securestring"
     },
-    "sharePointServicePoolManagedAccountUSerName": {
+    "sharePointServicePoolManagedAccountUserName": {
       "type": "string"
     },
     "sharePointServicePoolManagedAccountPassword": {
@@ -91,7 +91,7 @@
             "SharePointFarmPassphrasecreds": {
               "UserName": "ignore",
               "Password": "PrivateSettingsRef:SharePointFarmPassphrasePassword"
-            }        
+            }
         },
         "protectedSettings": {
           "Items": {
