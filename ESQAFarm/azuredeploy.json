@@ -188,6 +188,10 @@
       },
       "defaultValue": "esqa.test"
     },
+    "ouPath": {
+    "type": "string",
+    "defaultValue": "OU=Servers,DC=esqa,DC=test"
+    },
     "baseOUPath": {
     "type": "string",
     "defaultValue": "DC=esqa,DC=test"
@@ -296,6 +300,7 @@
     "ProvisioningSQLUrl": "[concat(parameters('baseUrl'),'/provisioningSQL.json')]",
     "configuringSQLUrl": "[concat(parameters('baseUrl'),'/configuringSQL.json')]",
     "ProvisioningWFEUrl": "[concat(parameters('baseUrl'),'/provisioningWFE.json')]",
+    "configuringWFEUrl": "[concat(parameters('baseUrl'),'/configuringWFE.json')]",
     "configuringSPUrl": "[concat(parameters('baseUrl'),'/configuringSharePoint.json')]"
   },
   "resources": [
@@ -778,12 +783,48 @@
         }
       },
       {
+        "name": "ConfiguringWFEServerVM",
+        "type": "Microsoft.Resources/deployments",
+        "apiVersion": "2015-01-01",
+        "dependsOn": [
+          "Microsoft.Resources/deployments/ProvisioningWFEServerVM",
+          "Microsoft.Resources/deployments/UpdatingDNStoPrimaryADVM"
+        ],
+        "properties": {
+          "mode": "Incremental",
+          "templateLink": {
+            "uri": "[variables('configuringWFEUrl')]",
+            "contentVersion": "1.0.0.0"
+          },
+          "parameters": {
+            "location": {
+              "value": "[parameters('location')]"
+            },
+            "wfeVMName": {
+              "value": "[variables('wfeVMName')]"
+            },
+            "adminUsername": {
+              "value": "[parameters('adminUsername')]"
+            },
+            "adminPassword": {
+              "value": "[parameters('adminPassword')]"
+            },
+            "ouPath": {
+              "value": "[parameters('ouPath')]"
+            },
+              "domainName": {
+              "value": "[parameters('domainName')]"
+            }
+            }
+        }
+      },
+         {
         "name": "ConfiguringSharepoint",
         "type": "Microsoft.Resources/deployments",
         "apiVersion": "2015-01-01",
         "dependsOn": [
-          "Microsoft.Resources/deployments/ConfiguringSQLServerVM"
-         ],
+          "Microsoft.Resources/deployments/ConfiguringWFEServerVM"
+          ],
         "properties": {
           "mode": "Incremental",
           "templateLink": {
