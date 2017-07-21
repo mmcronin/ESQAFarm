@@ -188,10 +188,6 @@
       },
       "defaultValue": "esqa.test"
     },
-    "ouPath": {
-    "type": "string",
-    "defaultValue": "OU=Servers,DC=esqa,DC=test"
-    },
     "baseOUPath": {
     "type": "string",
     "defaultValue": "DC=esqa,DC=test"
@@ -287,8 +283,8 @@
     "sqlPreparationFunction": "PrepareSqlServer.ps1\\PrepareSqlServer",
     "wfePrepareModulesURL": "[concat(variables('assetLocation'),'/PrepareWFEServer.ps1.zip')]",
     "wfePreparationFunction": "PrepareWFEServer.ps1\\PrepareWFEServer",
-    "spConfigureModulesURL": "[concat(variables('assetLocation'),'/ConfigureSharePointServer.ps1.zip')]",
-    "spConfigurationFunction": "ConfigureSharePointServer.ps1\\ConfigureSharePointServer",
+    "wfeConfigureModulesURL": "[concat(variables('assetLocation'),'/ConfigureWFEServer.ps1.zip')]",
+    "wfeConfigurationFunction": "ConfigureSharePointServer.ps1\\ConfigureWFEServer",
     "storageAccountSetupURL": "[concat(parameters('baseUrl'),'/storageAccount.json')]",
     "creatingPublicIPsUrl": "[concat(parameters('baseUrl'),'/creatingPublicIPs.json')]",
     "vnetwithDNSTemplateUrl": "[concat(parameters('baseUrl'),'/vnet-with-dns-server.json')]",
@@ -300,9 +296,8 @@
     "ProvisioningSQLUrl": "[concat(parameters('baseUrl'),'/provisioningSQL.json')]",
     "configuringSQLUrl": "[concat(parameters('baseUrl'),'/configuringSQL.json')]",
     "ProvisioningWFEUrl": "[concat(parameters('baseUrl'),'/provisioningWFE.json')]",
-    "configuringWFEUrl": "[concat(parameters('baseUrl'),'/configuringWFE.json')]",
-    "configuringSPUrl": "[concat(parameters('baseUrl'),'/configuringSharePoint.json')]"
-  },
+    "configuringWFEUrl": "[concat(parameters('baseUrl'),'/configuringWFE.json')]"
+     },
   "resources": [
     {
       "name": "SettingUpStorageAccount",
@@ -787,9 +782,8 @@
         "type": "Microsoft.Resources/deployments",
         "apiVersion": "2015-01-01",
         "dependsOn": [
-          "Microsoft.Resources/deployments/ProvisioningWFEServerVM",
-          "Microsoft.Resources/deployments/UpdatingDNStoPrimaryADVM"
-        ],
+          "Microsoft.Resources/deployments/ConfiguringSQLServerVM"
+          ],
         "properties": {
           "mode": "Incremental",
           "templateLink": {
@@ -797,49 +791,14 @@
             "contentVersion": "1.0.0.0"
           },
           "parameters": {
-            "location": {
-              "value": "[parameters('location')]"
-            },
-            "wfeVMName": {
-              "value": "[variables('wfeVMName')]"
-            },
-            "adminUsername": {
-              "value": "[parameters('adminUsername')]"
-            },
-            "adminPassword": {
-              "value": "[parameters('adminPassword')]"
-            },
-            "ouPath": {
-              "value": "[parameters('ouPath')]"
-            },
-              "domainName": {
-              "value": "[parameters('domainName')]"
-            }
-            }
-        }
-      },
-         {
-        "name": "ConfiguringSharepoint",
-        "type": "Microsoft.Resources/deployments",
-        "apiVersion": "2015-01-01",
-        "dependsOn": [
-          "Microsoft.Resources/deployments/ConfiguringWFEServerVM"
-          ],
-        "properties": {
-          "mode": "Incremental",
-          "templateLink": {
-            "uri": "[variables('configuringSPUrl')]",
-            "contentVersion": "1.0.0.0"
-          },
-          "parameters": {
-            "location": {
+          "location": {
               "value": "[parameters('location')]"
             },
             "spConfgureModulesURL": {
-            "value": "[variables('spConfigureModulesURL')]"
+            "value": "[variables('wfeConfigureModulesURL')]"
           },
           "spConfigurationFunction": {
-            "value": "[variables('spConfigurationFunction')]"
+            "value": "[variables('wfeConfigurationFunction')]"
           },
             "wfeVMName": {
               "value": "[variables('wfeVMName')]"
