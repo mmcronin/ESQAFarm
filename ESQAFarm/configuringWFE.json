@@ -88,10 +88,10 @@
               "UserName": "[parameters('sharePointServicePoolManagedAccountUserName')]",
               "Password": "PrivateSettingsRef:SharePointServicePoolManagedAccountPassword"
             },
-            "Passphrasecreds": {
+            "SharePointFarmPassphrasecreds": {
               "UserName": "ignore",
               "Password": "PrivateSettingsRef:SharePointFarmPassphrasePassword"
-            }            
+            }        
         },
         "protectedSettings": {
           "Items": {
