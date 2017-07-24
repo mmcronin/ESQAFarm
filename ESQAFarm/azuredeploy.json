@@ -25,7 +25,7 @@
       "metadata": {
         "description": "The address range of the new VNET "
       },
-      "defaultValue": "10.0.27.0/23"
+      "defaultValue": "10.1.27.0/23"
     },
     "adVmName": {
       "type": "string",
@@ -39,28 +39,28 @@
       "metadata": {
         "description": "The address range of the AD subnet created in the new VNET"
       },
-      "defaultValue": "10.0.27.0/24"
+      "defaultValue": "10.1.27.0/24"
     },
     "adNicIPAddress": {
       "type": "string",
       "metadata": {
         "description": "The IP address of the new AD VM"
       },
-      "defaultValue": "10.0.27.4"
+      "defaultValue": "10.1.27.4"
     },
     "sqlNicIPAddress": {
       "type": "string",
       "metadata": {
         "description": "The IP address of the new AD VM"
       },
-      "defaultValue": "10.0.27.5"
+      "defaultValue": "10.1.27.5"
     },
     "wfeNicIPAddress": {
       "type": "string",
       "metadata": {
         "description": "The IP address of the new AD VM"
       },
-      "defaultValue": "10.0.27.6"
+      "defaultValue": "10.1.27.6"
     },
      "adminUsername": {
       "type": "string",
@@ -368,7 +368,7 @@
     {
       "name": "[parameters('NSGName')]",
       "type": "Microsoft.Network/networkSecurityGroups",
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2017-06-01",
       "location": "[parameters('location')]", 
       "tags": {
         "displayName": "[parameters('NSGName')]"
