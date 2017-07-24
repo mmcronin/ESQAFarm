@@ -7,7 +7,7 @@
       "metadata": {
         "description": "The region to deploy the resources into"
       },
-      "defaultValue": "North Europe"
+      "defaultValue": "UK South"
     },
      "NSGName": {
       "type": "string",
@@ -206,7 +206,7 @@
         "artifactsBaseUrl": "",
         "description": "URL to acquire other templates"
       },
-      "defaultValue": "https://mcne.blob.core.windows.net/vhds/SP-Base20170713145420.vhd"
+      "defaultValue": "https://michaeltestrg445363836.blob.core.windows.net/vhds/SP-Base20170713145420.vhd"
     },
     "storageAccountNamePrefix": {
       "type": "string",
@@ -379,7 +379,7 @@
             "name": "RDP_Allow",
             "properties": {
               "description": "RDP_Allow",
-              "protocol": "TCP",
+              "protocol": "Tcp",
               "sourcePortRange": "*",
               "destinationPortRange": "3389",
               "sourceAddressPrefix": "*",
