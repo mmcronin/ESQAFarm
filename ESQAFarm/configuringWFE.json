@@ -99,7 +99,7 @@
             "sharePointSetupUserAccountPassword": "[parameters('sharePointSetupUserAccountPassword')]",
             "sharePointFarmAccountPassword": "[parameters('sharePointFarmAccountPassword')]",
             "sharePointWebPoolManagedAccountPassword": "[parameters('sharePointWebPoolManagedAccountPassword')]",
-            "sharePointServicePooolManagedAccountPassword": "[parameters('sharePointServicePoolManagedAccountPassword')]",
+            "sharePointServicePoolManagedAccountPassword": "[parameters('sharePointServicePoolManagedAccountPassword')]",
             "sharePointFarmPassphrasePassword": "[parameters('sharePointFarmPassphrasePassword')]"
           }
         }
