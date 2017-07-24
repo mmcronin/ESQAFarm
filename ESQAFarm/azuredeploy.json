@@ -794,10 +794,10 @@
           "location": {
               "value": "[parameters('location')]"
             },
-            "spConfgureModulesURL": {
+            "wfeConfgureModulesURL": {
             "value": "[variables('wfeConfigureModulesURL')]"
           },
-          "spConfigurationFunction": {
+          "wfeConfigurationFunction": {
             "value": "[variables('wfeConfigurationFunction')]"
           },
             "wfeVMName": {
