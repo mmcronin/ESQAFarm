@@ -72,35 +72,35 @@
               "UserName": "[parameters('adminUserName')]",
               "Password": "PrivateSettingsRef:AdminPassword"
             },
-            "SetupUserAccountcreds": {
+            "SetupUserAccountCreds": {
               "UserName": "[parameters('sharePointSetupUserAccountUserName')]",
-              "Password": "PrivateSettingsRef:SharePointSetupUserAccountPassword"
+              "Password": "PrivateSettingsRef:sharePointSetupUserAccountPassword"
             },
-            "FarmAccountcreds": {
+            "FarmAccountCreds": {
               "UserName": "[parameters('sharePointFarmAccountUserName')]",
-              "Password": "PrivateSettingsRef:SharePointFarmAccountPassword"
+              "Password": "PrivateSettingsRef:sharePointFarmAccountPassword"
             },
-             "WebPoolManagedAccountcreds": {
+             "WebPoolManagedAccountCreds": {
               "UserName": "[parameters('sharePointWebPoolManagedAccountUserName')]",
-              "Password": "PrivateSettingsRef:SharePointWebPoolManagedAccountPassword"
+              "Password": "PrivateSettingsRef:sharePointWebPoolManagedAccountPassword"
             },
-            "ServicePoolManagedAccountcreds": {
+            "ServicePoolManagedAccountCreds": {
               "UserName": "[parameters('sharePointServicePoolManagedAccountUserName')]",
-              "Password": "PrivateSettingsRef:SharePointServicePoolManagedAccountPassword"
+              "Password": "PrivateSettingsRef:sharePointServicePoolManagedAccountPassword"
             },
-            "SharePointFarmPassphrasecreds": {
+            "SharePointFarmPassphraseCreds": {
               "UserName": "ignore",
-              "Password": "PrivateSettingsRef:SharePointFarmPassphrasePassword"
+              "Password": "PrivateSettingsRef:sharePointFarmPassphrasePassword"
             }
         },
         "protectedSettings": {
           "Items": {
-            "AdminPassword": "[parameters('adminPassword')]",
-            "SharePointSetupUserAccountPassword": "[parameters('sharePointSetupUserAccountPassword')]",
-            "SharePointFarmAccountPassword": "[parameters('sharePointFarmAccountPassword')]",
-            "SharePointWebPoolManagedAccountPassword": "[parameters('sharePointWebPoolManagedAccountPassword')]",
-            "SharePointServicePooolManagedAccountPassword": "[parameters('sharePointServicePoolManagedAccountPassword')]",
-            "SharePointFarmPassphrasePassword": "[parameters('sharePointFarmPassphrasePassword')]"
+            "adminPassword": "[parameters('adminPassword')]",
+            "sharePointSetupUserAccountPassword": "[parameters('sharePointSetupUserAccountPassword')]",
+            "sharePointFarmAccountPassword": "[parameters('sharePointFarmAccountPassword')]",
+            "sharePointWebPoolManagedAccountPassword": "[parameters('sharePointWebPoolManagedAccountPassword')]",
+            "sharePointServicePooolManagedAccountPassword": "[parameters('sharePointServicePoolManagedAccountPassword')]",
+            "sharePointFarmPassphrasePassword": "[parameters('sharePointFarmPassphrasePassword')]"
           }
         }
       }
