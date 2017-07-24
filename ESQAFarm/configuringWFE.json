@@ -5,10 +5,10 @@
     "location": {
       "type": "string"
     },
-    "spConfgureModulesURL": {
+    "wfeConfgureModulesURL": {
       "type": "string"
     },
-    "spConfigurationFunction": {
+    "wfeConfigurationFunction": {
       "type": "string"
     },
     "wfeVMName": {
@@ -54,7 +54,7 @@
   "resources": [
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('wfeVMName'),'/ConfigureSPServer')]",
+      "name": "[concat(parameters('wfeVMName'),'/ConfigureWFEServer')]",
       "apiVersion": "2015-06-15",
       "location": "[parameters('location')]",
       "properties": {
@@ -63,9 +63,9 @@
         "typeHandlerVersion": "2.20",
         "autoUpgradeMinorVersion": false,
         "settings": {
-          "ModulesUrl": "[parameters('spConfgureModulesURL')]",
+          "ModulesUrl": "[parameters('wfeConfgureModulesURL')]",
           "wmfVersion": "4.0",
-          "ConfigurationFunction": "[parameters('spConfigurationFunction')]",
+          "ConfigurationFunction": "[parameters('wfeConfigurationFunction')]",
           "Properties": {
             "DomainName": "[parameters('domainName')]",
             "AdminCreds": {

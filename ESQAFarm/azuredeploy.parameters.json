@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
   "parameters": {
     "location": {
-      "value": "UK South"
+      "value": "North Europe"
     },
     "storageAccountType": {
       "value": "Premium_LRS"
