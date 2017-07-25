@@ -316,39 +316,9 @@
       }
     },
     {
-      "name": "[parameters('NSGName')]",
-      "type": "Microsoft.Network/networkSecurityGroups",
-      "apiVersion": "2015-06-15",
-      "location": "[parameters('location')]", 
-      "tags": {
-        "displayName": "[parameters('NSGName')]"
-      },                    
-      "properties": {
-        "securityRules": [
-          {
-            "name": "RDP_Allow",
-            "properties": {
-              "description": "RDP_Allow",
-              "protocol": "Tcp",
-              "sourcePortRange": "*",
-              "destinationPortRange": "3389",
-              "sourceAddressPrefix": "*",
-              "destinationAddressPrefix": "*",
-              "access": "Allow",
-              "priority": 100,
-              "direction": "Inbound"
-            }
-          }
-        ]
-      }
-    },
-    {
       "name": "SettingUpVirtualNetwork",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
-      "dependsOn": [
-          "[concat('Microsoft.Network/networkSecurityGroups/', parameters('NSGName'))]"
-         ],
       "properties": {
         "mode": "Incremental",
         "templateLink": {
