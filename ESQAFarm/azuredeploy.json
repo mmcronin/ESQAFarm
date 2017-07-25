@@ -336,7 +336,7 @@
             "name": "RDP_Allow",
             "properties": {
               "description": "RDP_Allow",
-              "protocol": "TCP",
+              "protocol": "Tcp",
               "sourcePortRange": "*",
               "destinationPortRange": "3389",
               "sourceAddressPrefix": "*",
@@ -760,6 +760,9 @@
             },
             "adminPassword": {
               "value": "[parameters('adminPassword')]"
+            },
+            "ouPath": {
+              "value": "[parameters('ouPath')]"
             },
               "domainName": {
               "value": "[parameters('domainName')]"
