@@ -9,6 +9,10 @@
       },
       "defaultValue": "UK South"
     },
+     "NSGName": {
+      "type": "string",
+      "defaultValue": "MCESQAVNET-Subnet"
+    },
     "virtualNetworkName": {
       "type": "string",
       "metadata": {
@@ -21,7 +25,7 @@
       "metadata": {
         "description": "The address range of the new VNET "
       },
-      "defaultValue": "10.1.27.0/23"
+      "defaultValue": "10.0.27.0/23"
     },
     "adVmName": {
       "type": "string",
@@ -35,28 +39,28 @@
       "metadata": {
         "description": "The address range of the AD subnet created in the new VNET"
       },
-      "defaultValue": "10.1.27.0/24"
+      "defaultValue": "10.0.27.0/24"
     },
     "adNicIPAddress": {
       "type": "string",
       "metadata": {
         "description": "The IP address of the new AD VM"
       },
-      "defaultValue": "10.1.27.4"
+      "defaultValue": "10.0.27.4"
     },
     "sqlNicIPAddress": {
       "type": "string",
       "metadata": {
         "description": "The IP address of the new AD VM"
       },
-      "defaultValue": "10.1.27.5"
+      "defaultValue": "10.0.27.5"
     },
     "wfeNicIPAddress": {
       "type": "string",
       "metadata": {
         "description": "The IP address of the new AD VM"
       },
-      "defaultValue": "10.1.27.6"
+      "defaultValue": "10.0.27.6"
     },
      "adminUsername": {
       "type": "string",
@@ -105,7 +109,7 @@
         "description": "The SQL Server Service account password"
       }
     },
-   "sharePointSetupUserAccountUserName": {
+    "sharePointSetupUserAccountUserName": {
       "type": "string",
       "metadata": {
         "description": "The Sharepoint Setup account name"
@@ -138,6 +142,10 @@
         "description": "The FQDN of the AD Domain created "
       },
       "defaultValue": "esqa.test"
+    },
+    "ouPath": {
+    "type": "string",
+    "defaultValue": "OU=Servers,DC=esqa,DC=test"
     },
     "baseOUPath": {
     "type": "string",
@@ -219,7 +227,10 @@
       {
         "name": "[variables('VMSubnetName')]",
         "properties": {
-          "addressPrefix": "[parameters('VMSubnet')]"
+          "addressPrefix": "[parameters('VMSubnet')]",
+          "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('NSGName'))]"
+                 }
         }
       }
     ],
@@ -231,8 +242,6 @@
     "sqlPreparationFunction": "PrepareSqlServer.ps1\\PrepareSqlServer",
     "wfePrepareModulesURL": "[concat(variables('assetLocation'),'/PrepareWFEServer.ps1.zip')]",
     "wfePreparationFunction": "PrepareWFEServer.ps1\\PrepareWFEServer",
-    "wfeConfigureModulesURL": "[concat(variables('assetLocation'),'/ConfigureWFEServer.ps1.zip')]",
-    "wfeConfigurationFunction": "ConfigureSharePointServer.ps1\\ConfigureWFEServer",
     "storageAccountSetupURL": "[concat(parameters('baseUrl'),'/storageAccount.json')]",
     "creatingPublicIPsUrl": "[concat(parameters('baseUrl'),'/creatingPublicIPs.json')]",
     "vnetwithDNSTemplateUrl": "[concat(parameters('baseUrl'),'/vnet-with-dns-server.json')]",
@@ -245,7 +254,7 @@
     "configuringSQLUrl": "[concat(parameters('baseUrl'),'/configuringSQL.json')]",
     "ProvisioningWFEUrl": "[concat(parameters('baseUrl'),'/provisioningWFE.json')]",
     "configuringWFEUrl": "[concat(parameters('baseUrl'),'/configuringWFE.json')]"
-     },
+  },
   "resources": [
     {
       "name": "SettingUpStorageAccount",
@@ -314,9 +323,39 @@
       }
     },
     {
+      "name": "[parameters('NSGName')]",
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2015-06-15",
+      "location": "[parameters('location')]", 
+      "tags": {
+        "displayName": "[parameters('NSGName')]"
+      },                    
+      "properties": {
+        "securityRules": [
+          {
+            "name": "RDP_Allow",
+            "properties": {
+              "description": "RDP_Allow",
+              "protocol": "TCP",
+              "sourcePortRange": "*",
+              "destinationPortRange": "3389",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 100,
+              "direction": "Inbound"
+            }
+          }
+        ]
+      }
+    },
+    {
       "name": "SettingUpVirtualNetwork",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
+      "dependsOn": [
+          "[concat('Microsoft.Network/networkSecurityGroups/', parameters('NSGName'))]"
+         ],
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -695,13 +734,14 @@
           }
         }
       },
-      {
+         {
         "name": "ConfiguringWFEServerVM",
         "type": "Microsoft.Resources/deployments",
         "apiVersion": "2015-01-01",
         "dependsOn": [
-          "Microsoft.Resources/deployments/ConfiguringSQLServerVM"
-          ],
+          "Microsoft.Resources/deployments/ProvisioningWFEServerVM",
+          "Microsoft.Resources/deployments/UpdatingDNStoPrimaryADVM"
+        ],
         "properties": {
           "mode": "Incremental",
           "templateLink": {
@@ -709,15 +749,9 @@
             "contentVersion": "1.0.0.0"
           },
           "parameters": {
-          "location": {
+            "location": {
               "value": "[parameters('location')]"
             },
-            "wfeConfgureModulesURL": {
-            "value": "[variables('wfeConfigureModulesURL')]"
-          },
-          "wfeConfigurationFunction": {
-            "value": "[variables('wfeConfigurationFunction')]"
-          },
             "wfeVMName": {
               "value": "[variables('wfeVMName')]"
             },
@@ -727,7 +761,7 @@
             "adminPassword": {
               "value": "[parameters('adminPassword')]"
             },
-           "domainName": {
+              "domainName": {
               "value": "[parameters('domainName')]"
             }
             }

@@ -53,7 +53,7 @@
           "id": "[resourceId('Microsoft.Compute/availabilitySets', parameters('AvailabilitySetName'))]"
         },
           "osProfile": {
-          "computerName": "[parameters('wfeVMName')]",
+          "computername": "[parameters('wfeVMName')]",
           "adminUsername": "[parameters('adminUsername')]",
           "adminPassword": "[parameters('adminPassword')]"
         },
@@ -89,7 +89,7 @@
           },
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('wfeVMName'),'/ConfigureWFEServer')]",
+      "name": "[concat(parameters('wfeVMName'),'/CreateWFEServer')]",
       "apiVersion": "2015-06-15",
       "location": "[parameters('location')]",
       "dependsOn": [
