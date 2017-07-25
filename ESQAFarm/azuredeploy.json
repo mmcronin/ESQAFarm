@@ -9,11 +9,7 @@
       },
       "defaultValue": "UK South"
     },
-     "NSGName": {
-      "type": "string",
-      "defaultValue": "MCESQAVNET-Subnet"
-    },
-    "virtualNetworkName": {
+     "virtualNetworkName": {
       "type": "string",
       "metadata": {
         "description": "The name of the Virtual Network to Create"
@@ -227,10 +223,7 @@
       {
         "name": "[variables('VMSubnetName')]",
         "properties": {
-          "addressPrefix": "[parameters('VMSubnet')]",
-          "networkSecurityGroup": {
-                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('NSGName'))]"
-                 }
+          "addressPrefix": "[parameters('VMSubnet')]"
         }
       }
     ],
