@@ -105,7 +105,19 @@
         "description": "The SQL Server Service account password"
       }
     },
-   
+   "sharePointSetupUserAccountUserName": {
+      "type": "string",
+      "metadata": {
+        "description": "The Sharepoint Setup account name"
+      },
+      "defaultValue": "sp_install"
+    },
+    "sharePointSetupUserAccountPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "The Sharepoint Setup account password"
+      }
+    },
     "wfeVmName": {
       "type": "string",
       "metadata": {
