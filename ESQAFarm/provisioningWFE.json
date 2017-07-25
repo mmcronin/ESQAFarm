@@ -53,7 +53,7 @@
           "id": "[resourceId('Microsoft.Compute/availabilitySets', parameters('AvailabilitySetName'))]"
         },
           "osProfile": {
-          "computername": "[parameters('wfeVMName')]",
+          "computerName": "[parameters('wfeVMName')]",
           "adminUsername": "[parameters('adminUsername')]",
           "adminPassword": "[parameters('adminPassword')]"
         },

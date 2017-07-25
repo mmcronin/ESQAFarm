@@ -43,7 +43,7 @@
             "DomainName": "[parameters('domainName')]",
             "AdminCreds": {
               "UserName": "[parameters('adminUserName')]",
-              "Password": "PrivateSettingsRef:AdminPassword"
+              "Password": "PrivateSettingsRef:adminPassword"
             }
         },
         "protectedSettings": {
