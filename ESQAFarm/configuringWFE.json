@@ -37,6 +37,7 @@
         "autoUpgradeMinorVersion": true,
          "settings": {
           "ModulesUrl": "[parameters('wfeConfigureModulesURL')]",
+          "wmfVersion": "5.0",
           "ConfigurationFunction": "[parameters('wfeConfigurationFunction')]",
           "Properties": {
             "DomainName": "[parameters('domainName')]",
