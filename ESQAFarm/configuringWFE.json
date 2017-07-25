@@ -20,24 +20,6 @@
     "adminPassword": {
       "type": "securestring"
     },
-    "sharePointSetupUserAccountUserName": {
-      "type": "string"
-    },
-    "sharePointSetupUserAccountPassword": {
-      "type": "securestring"
-    },
-    "sharePointFarmAccountUserName": {
-      "type": "string"
-    },
-     "sharePointFarmAccountPassword": {
-      "type": "securestring"
-    },
-     "sharePointWebPoolManagedAccountUserName": {
-      "type": "string"
-    },
-    "sharePointWebPoolManagedAccountPassword": {
-      "type": "securestring"
-    },
     "domainName": {
       "type": "string"
     }
@@ -62,31 +44,12 @@
             "AdminCreds": {
               "UserName": "[parameters('adminUserName')]",
               "Password": "PrivateSettingsRef:AdminPassword"
-            },
-            "SetupUserAccountCreds": {
-              "UserName": "[parameters('sharePointSetupUserAccountUserName')]",
-              "Password": "PrivateSettingsRef:sharePointSetupUserAccountPassword"
-            },
-            "FarmAccountCreds": {
-              "UserName": "[parameters('sharePointFarmAccountUserName')]",
-              "Password": "PrivateSettingsRef:sharePointFarmAccountPassword"
-            },
-             "WebPoolManagedAccountCreds": {
-              "UserName": "[parameters('sharePointWebPoolManagedAccountUserName')]",
-              "Password": "PrivateSettingsRef:sharePointWebPoolManagedAccountPassword"
-            },
-            "SharePointFarmPassphraseCreds": {
-              "UserName": "ignore",
-              "Password": "PrivateSettingsRef:sharePointFarmPassphrasePassword"
             }
         },
         "protectedSettings": {
           "Items": {
-            "adminPassword": "[parameters('adminPassword')]",
-            "sharePointSetupUserAccountPassword": "[parameters('sharePointSetupUserAccountPassword')]",
-            "sharePointFarmAccountPassword": "[parameters('sharePointFarmAccountPassword')]",
-            "sharePointWebPoolManagedAccountPassword": "[parameters('sharePointWebPoolManagedAccountPassword')]"
-          }
+            "adminPassword": "[parameters('adminPassword')]"
+           }
         }
       }
     }

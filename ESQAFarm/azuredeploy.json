@@ -105,45 +105,7 @@
         "description": "The SQL Server Service account password"
       }
     },
-    "sharePointSetupUserAccountUserName": {
-      "type": "string",
-      "metadata": {
-        "description": "The Sharepoint Setup account name"
-      },
-      "defaultValue": "sp_install"
-    },
-    "sharePointSetupUserAccountPassword": {
-      "type": "securestring",
-      "metadata": {
-        "description": "The Sharepoint Setup account password"
-      }
-    },
-    "sharePointFarmAccountUserName": {
-      "type": "string",
-      "metadata": {
-        "description": "The Sharepoint Farm account name"
-      },
-      "defaultValue": "sp_farm"
-    },
-    "sharePointFarmAccountPassword": {
-      "type": "securestring",
-      "metadata": {
-        "description": "The Sharepoint Farm account password"
-      }
-    },
-     "sharePointWebPoolManagedAccountUserName": {
-      "type": "string",
-      "metadata": {
-        "description": "The Sharepoint Web Pool Account"
-      },
-      "defaultValue": "sp_webpool"
-    },
-    "sharePointWebPoolManagedAccountPassword": {
-      "type": "securestring",
-      "metadata": {
-        "description": "The Sharepoint Web Pool account password"
-      }
-    },
+   
     "wfeVmName": {
       "type": "string",
       "metadata": {
@@ -753,25 +715,7 @@
             "adminPassword": {
               "value": "[parameters('adminPassword')]"
             },
-            "sharePointSetupUserAccountUserName": {
-            "value": "[parameters('sharePointSetupUserAccountUserName')]"
-          },
-           "sharePointSetupUserAccountPassword": {
-            "value": "[parameters('sharePointSetupUserAccountPassword')]"
-          },
-          "sharePointFarmAccountUserName": {
-            "value": "[parameters('sharePointFarmAccountUserName')]"
-          },
-          "sharePointFarmAccountPassword": {
-            "value": "[parameters('sharePointFarmAccountPassword')]"
-          },
-           "sharePointWebPoolManagedAccountUserName": {
-            "value": "[parameters('sharePointWebPoolManagedAccountUserName')]"
-          },
-          "sharePointWebPoolManagedAccountPassword": {
-            "value": "[parameters('sharePointWebPoolManagedAccountPassword')]"
-          },
-          "domainName": {
+           "domainName": {
               "value": "[parameters('domainName')]"
             }
             }
