@@ -38,9 +38,6 @@
     "sharePointWebPoolManagedAccountPassword": {
       "type": "securestring"
     },
-    "sharePointFarmPassphrasePassword": {
-      "type": "securestring"
-    },
     "domainName": {
       "type": "string"
     }
@@ -88,8 +85,7 @@
             "adminPassword": "[parameters('adminPassword')]",
             "sharePointSetupUserAccountPassword": "[parameters('sharePointSetupUserAccountPassword')]",
             "sharePointFarmAccountPassword": "[parameters('sharePointFarmAccountPassword')]",
-            "sharePointWebPoolManagedAccountPassword": "[parameters('sharePointWebPoolManagedAccountPassword')]",
-            "sharePointFarmPassphrasePassword": "[parameters('sharePointFarmPassphrasePassword')]"
+            "sharePointWebPoolManagedAccountPassword": "[parameters('sharePointWebPoolManagedAccountPassword')]"
           }
         }
       }

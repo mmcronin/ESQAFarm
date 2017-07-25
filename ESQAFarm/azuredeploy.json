@@ -144,12 +144,6 @@
         "description": "The Sharepoint Web Pool account password"
       }
     },
-    "sharePointFarmPassphrasePassword": {
-      "type": "securestring",
-      "metadata": {
-        "description": "The Sharepoint Farm Passphrase"
-      }
-    },
     "wfeVmName": {
       "type": "string",
       "metadata": {
@@ -777,10 +771,7 @@
           "sharePointWebPoolManagedAccountPassword": {
             "value": "[parameters('sharePointWebPoolManagedAccountPassword')]"
           },
-          "sharePointFarmPassphrasePassword": {
-            "value": "[parameters('sharePointFarmPassphrasePassword')]"
-          },
-              "domainName": {
+          "domainName": {
               "value": "[parameters('domainName')]"
             }
             }
