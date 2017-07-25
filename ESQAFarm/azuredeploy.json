@@ -144,19 +144,6 @@
         "description": "The Sharepoint Web Pool account password"
       }
     },
-    "sharePointServicePoolManagedAccountUserName": {
-      "type": "string",
-      "metadata": {
-        "description": "The Sharepoint Service Pool Account"
-      },
-      "defaultValue": "sp_servicepool"
-    },
-    "sharePointServicePoolManagedAccountPassword": {
-      "type": "securestring",
-      "metadata": {
-        "description": "The Sharepoint Service Pool account password"
-      }
-    },
     "sharePointFarmPassphrasePassword": {
       "type": "securestring",
       "metadata": {
@@ -789,12 +776,6 @@
           },
           "sharePointWebPoolManagedAccountPassword": {
             "value": "[parameters('sharePointWebPoolManagedAccountPassword')]"
-          },
-          "sharePointServicePoolManagedAccountUserName": {
-            "value": "[parameters('sharePointServicePoolManagedAccountUserName')]"
-          },
-          "sharePointServicePoolManagedAccountPassword": {
-            "value": "[parameters('sharePointServicePoolManagedAccountPassword')]"
           },
           "sharePointFarmPassphrasePassword": {
             "value": "[parameters('sharePointFarmPassphrasePassword')]"

@@ -38,12 +38,6 @@
     "sharePointWebPoolManagedAccountPassword": {
       "type": "securestring"
     },
-    "sharePointServicePoolManagedAccountUserName": {
-      "type": "string"
-    },
-    "sharePointServicePoolManagedAccountPassword": {
-      "type": "securestring"
-    },
     "sharePointFarmPassphrasePassword": {
       "type": "securestring"
     },
@@ -84,10 +78,6 @@
               "UserName": "[parameters('sharePointWebPoolManagedAccountUserName')]",
               "Password": "PrivateSettingsRef:sharePointWebPoolManagedAccountPassword"
             },
-            "ServicePoolManagedAccountCreds": {
-              "UserName": "[parameters('sharePointServicePoolManagedAccountUserName')]",
-              "Password": "PrivateSettingsRef:sharePointServicePoolManagedAccountPassword"
-            },
             "SharePointFarmPassphraseCreds": {
               "UserName": "ignore",
               "Password": "PrivateSettingsRef:sharePointFarmPassphrasePassword"
@@ -99,7 +89,6 @@
             "sharePointSetupUserAccountPassword": "[parameters('sharePointSetupUserAccountPassword')]",
             "sharePointFarmAccountPassword": "[parameters('sharePointFarmAccountPassword')]",
             "sharePointWebPoolManagedAccountPassword": "[parameters('sharePointWebPoolManagedAccountPassword')]",
-            "sharePointServicePoolManagedAccountPassword": "[parameters('sharePointServicePoolManagedAccountPassword')]",
             "sharePointFarmPassphrasePassword": "[parameters('sharePointFarmPassphrasePassword')]"
           }
         }
