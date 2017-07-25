@@ -33,11 +33,10 @@
         "properties": {
         "publisher": "Microsoft.Powershell",
         "type": "DSC",
-        "typeHandlerVersion": "2.13",
+        "typeHandlerVersion": "2.20",
         "autoUpgradeMinorVersion": true,
          "settings": {
           "ModulesUrl": "[parameters('wfeConfigureModulesURL')]",
-          "wmfVersion": "5.0",
           "ConfigurationFunction": "[parameters('wfeConfigurationFunction')]",
           "Properties": {
             "DomainName": "[parameters('domainName')]",
