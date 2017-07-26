@@ -47,7 +47,7 @@
           "configurationArguments": {
             "AdminCreds": {
               "UserName": "[parameters('adminUsername')]",
-              "Password": "PrivateSettingsRef:adminPassword"
+              "Password": "[parameters('adminPassword')]"
             }
           }         
         }
