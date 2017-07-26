@@ -44,14 +44,14 @@
             "AdminCreds": {
               "UserName": "[parameters('adminUsername')]",
               "Password": "PrivateSettingsRef:adminPassword"
-            },
+              }
+            }
+          },
         "protectedsettings": {
           "adminPassword": "[parameters('adminPassword')]"
-        }
+         }
       }
-    }
-  }
-  }
+    }  
   ],
   "outputs": {}
 }
