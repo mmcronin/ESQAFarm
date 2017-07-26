@@ -101,11 +101,11 @@
       "properties": {
         "publisher": "Microsoft.Powershell",
         "type": "DSC",
-        "typeHandlerVersion": "2.20",
+        "typeHandlerVersion": "2.26",
         "autoUpgradeMinorVersion": true,
         "settings": {
           "ModulesUrl": "[parameters('wfePrepareModulesURL')]",
-          "wmfVersion": "5.0",
+          "wmfVersion": "latest",
           "ConfigurationFunction": "[parameters('wfePreparationFunction')]",
           "Properties": {
             "DNSServer": "[parameters('DNSServerAddress')]"

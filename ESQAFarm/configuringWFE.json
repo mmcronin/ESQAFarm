@@ -33,25 +33,25 @@
         "properties": {
         "publisher": "Microsoft.Powershell",
         "type": "DSC",
-        "typeHandlerVersion": "2.20",
+        "typeHandlerVersion": "2.26",
         "autoUpgradeMinorVersion": false,
          "settings": {
           "ModulesUrl": "[parameters('wfeConfigureModulesURL')]",
-          "wmfVersion": "5.0",
+          "wmfVersion": "latest",
           "ConfigurationFunction": "[parameters('wfeConfigurationFunction')]",
           "Properties": {
-            "DomainName": "[parameters('domainName')]",
+            "DomainName": "[parameters('domainName')]"
+            }
+          },
+        "protectedSettings": {
+          "configurationArguments": {
             "AdminCreds": {
               "UserName": "[parameters('adminUsername')]",
               "Password": "PrivateSettingsRef:adminPassword"
-              }
             }
-          },
-        "protectedsettings": {
-          "adminPassword": "[parameters('adminPassword')]"
-         }
+          }         
+        }
       }
     }  
-  ],
-  "outputs": {}
+  ]
 }
