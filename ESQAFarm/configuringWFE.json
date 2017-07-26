@@ -34,7 +34,7 @@
         "publisher": "Microsoft.Powershell",
         "type": "DSC",
         "typeHandlerVersion": "2.20",
-        "autoUpgradeMinorVersion": true,
+        "autoUpgradeMinorVersion": false,
          "settings": {
           "ModulesUrl": "[parameters('wfeConfigureModulesURL')]",
           "wmfVersion": "5.0",
@@ -42,11 +42,11 @@
           "Properties": {
             "DomainName": "[parameters('domainName')]",
             "AdminCreds": {
-              "UserName": "[parameters('adminUserName')]",
-              "Password": "PrivateSettingsRef:AdminPassword"
+              "UserName": "[parameters('adminUsername')]",
+              "Password": "PrivateSettingsRef:adminPassword"
             },
         "protectedsettings": {
-          "Password": "[parameters('adminPassword')]"
+          "adminPassword": "[parameters('adminPassword')]"
         }
       }
     }

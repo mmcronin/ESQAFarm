@@ -151,7 +151,15 @@
       },
       "defaultValue": "https://raw.githubusercontent.com/mmcronin/ESQAfarm/master/ESQAFarm/"
     },
-    "WFEVhdUri": {
+    "wfeVhdContainerUri": {
+      "type": "string",
+      "metadata": {
+        "artifactsBaseUrl": "",
+        "description": "URL to acquire other templates"
+      },
+      "defaultValue": "https://michaeltestrg445363836.blob.core.windows.net/vhds/"
+    },
+    "wfeBaseVhdUri": {
       "type": "string",
       "metadata": {
         "artifactsBaseUrl": "",
@@ -590,8 +598,11 @@
             "storageAccountNamePrefix": {
               "value": "[parameters('storageAccountNamePrefix')]"
             },
-            "wfeVhdUri": {
-              "value": "[parameters('wfeVhdUri')]"
+            "wfeVhdContainerUri": {
+              "value": "[parameters('wfeVhdContainerUri')]"
+             },
+            "wfeBaseVhdUri": {
+              "value": "[parameters('wfeBaseVhdUri')]"
             },
             "wfeNicName": {
               "value": "[variables('wfeNicName')]"
@@ -700,9 +711,8 @@
         "type": "Microsoft.Resources/deployments",
         "apiVersion": "2015-01-01",
         "dependsOn": [
-          "Microsoft.Resources/deployments/ProvisioningWFEServerVM",
-          "Microsoft.Resources/deployments/UpdatingDNStoPrimaryADVM"
-        ],
+          "Microsoft.Resources/deployments/ConfiguringSQLServerVM"
+          ],
         "properties": {
           "mode": "Incremental",
           "templateLink": {
