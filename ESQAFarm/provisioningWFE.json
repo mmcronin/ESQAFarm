@@ -35,7 +35,10 @@
     "DNSServerAddress": {
       "type": "string"
     },
-    "WFEVhdUri": {
+   "wfeVhdContainerUri": {
+      "type": "string"
+    }
+    "wfeBaseVhdUri": {
       "type": "string"
     }
    },
@@ -64,10 +67,10 @@
             "caching": "ReadWrite",
             "createOption": "FromImage",
             "image": {
-              "uri": "[parameters('wfeVhdUri')]"
+              "uri": "[parameters('wfeBaseVhdUri')]"
             },
             "vhd": {
-              "uri": "[concat('https://michaeltestrg445363836.blob.core.windows.net/vhds/',parameters('wfeVMName'),'-osdisk.vhd')]"
+              "uri": "[concat(parameters('wfeVhdContainerUri'),parameters('wfeVMName'),'-osdisk.vhd')]"
             }
           }
 
