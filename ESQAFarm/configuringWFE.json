@@ -28,7 +28,7 @@
     {
       "apiVersion": "2015-06-15",
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('wfeVMName'),'/ConfigureWFEServer')]",
+      "name": "[concat(parameters('wfeVMName'),'/CreateWFEServer')]",
       "location": "[parameters('location')]",
         "properties": {
         "publisher": "Microsoft.Powershell",
