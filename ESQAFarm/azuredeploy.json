@@ -131,6 +131,12 @@
         "description": "The Sharepoint Farm account password"
       }
     },
+   "sharePointFarmPassphrasePassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "The Sharepoint Farm Passphrase"
+      }
+    },
     "wfeVmName": {
       "type": "string",
       "metadata": {
@@ -751,6 +757,15 @@
            "sharePointFarmAccountPassword": {
             "value": "[parameters('sharePointFarmAccountPassword')]"
             },
+            "sharePointSetupUserAccountUserName": {
+            "value": "[parameters('sharePointSetupUserAccountUserName')]"
+           },
+           "sharePointSetupUserAccountPassword": {
+            "value": "[parameters('sharePointSetupUserAccountPassword')]"
+           },
+           "sharePointFarmPassphrasePassword": {
+            "value": "[parameters('sharePointFarmPassphrasePassword')]"
+           },
             "wfeConfigureModulesURL": {
               "value": "[variables('wfeConfigureModulesURL')]"
             },

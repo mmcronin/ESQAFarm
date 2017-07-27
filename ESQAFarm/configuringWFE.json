@@ -20,6 +20,15 @@
     "sharePointFarmAccountPassword": {
       "type": "securestring"
     },
+    "sharePointSetupUserAccountUserName": {
+    "type": "string"
+    },
+   "sharePointSetupUserAccountPassword": {
+      "type": "securestring"
+    },
+    "sharePointFarmPassphrasePassword": {
+      "type": "securestring"
+    },
     "wfeConfigureModulesURL": {
       "type": "string"
     },
@@ -54,13 +63,23 @@
             "SharePointFarmAccountcreds": {
               "UserName": "[parameters('sharePointFarmAccountUserName')]",
               "Password": "PrivateSettingsRef:SharePointFarmAccountPassword"
+            },
+              "SharePointSetupUserAccountcreds": {
+              "UserName": "[parameters('sharePointSetupUserAccountUserName')]",
+              "Password": "PrivateSettingsRef:SharePointSetupUserAccountPassword"
+            },
+            "SharePointFarmPassphrasecreds": {
+              "UserName": "ignore",
+              "Password": "PrivateSettingsRef:SharePointFarmPassphrasePassword"
             }
             }
           },
         "protectedSettings": {
           "Items": {
             "AdminPassword": "[parameters('adminPassword')]",
-            "SharePointFarmAccountPassword": "[parameters('sharePointFarmAccountPassword')]"
+            "SharePointFarmAccountPassword": "[parameters('sharePointFarmAccountPassword')]",
+            "SharePointSetupUserAccountPassword": "[parameters('sharePointSetupUserAccountPassword')]",
+            "SharePointFarmPassphrasePassword": "[parameters('sharePointFarmPassphrasePassword')]"
           }         
         }
       }
