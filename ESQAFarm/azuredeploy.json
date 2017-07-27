@@ -118,6 +118,19 @@
         "description": "The Sharepoint Setup account password"
       }
     },
+    "sharePointFarmAccountUserName": {
+      "type": "string",
+      "metadata": {
+        "description": "The Sharepoint Farm account name"
+      },
+      "defaultValue": "sp_farm"
+    },
+    "sharePointFarmAccountPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "The Sharepoint Farm account password"
+      }
+    },
     "wfeVmName": {
       "type": "string",
       "metadata": {
@@ -731,6 +744,12 @@
             },
             "adminPassword": {
               "value": "[parameters('adminPassword')]"
+            },
+           "sharePointFarmAccountUserName": {
+            "value": "[parameters('sharePointFarmAccountUserName')]"
+            },
+           "sharePointFarmAccountPassword": {
+            "value": "[parameters('sharePointFarmAccountPassword')]"
             },
             "wfeConfigureModulesURL": {
               "value": "[variables('wfeConfigureModulesURL')]"
