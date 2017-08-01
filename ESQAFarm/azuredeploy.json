@@ -210,7 +210,7 @@
         "artifactsBaseUrl": "",
         "description": "URL to acquire other templates"
       },
-      "defaultValue": "https://michaeltestrg445363836.blob.core.windows.net/vhds/ESQABaseImage20170801093159.vhd"
+      "defaultValue": "https://michaeltestrg445363836.blob.core.windows.net/vhds/SP-Base20170713145420.vhd"
     },
     "storageAccountNamePrefix": {
       "type": "string",
